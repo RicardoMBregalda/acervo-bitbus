@@ -15,7 +15,7 @@ Acervo Bitbus
 # Sprint 1
 
 - Gerenciamento de Acervo Tecnológico
-- Agendamento de Visitas
+- Agendamento de Visitas Itinerantes
 - Registro de Pariticpantes
 
 
