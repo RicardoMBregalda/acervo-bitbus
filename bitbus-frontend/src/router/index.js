@@ -12,7 +12,11 @@ const routes = [
     name:'Visitante',
     component:() => import('../views/Visitante.vue'),
   },
-
+  {
+    path:'/cadastrarvisitante',
+    name:'CadastrarVisitante',
+    component:() => import('../views/VisitanteCadastrar.vue'),
+  },
 ];
 
 const router = createRouter({

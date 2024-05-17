@@ -16,6 +16,7 @@ export default {
       serif: ['Merriweather', 'serif'],
     },
     
+    
     extend: {
       spacing: {
         '128': '32rem',
