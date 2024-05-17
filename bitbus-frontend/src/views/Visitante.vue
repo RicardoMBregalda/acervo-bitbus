@@ -11,233 +11,64 @@ import Sidebar from '../components/Sidebar.vue'
     </button>
 </div>
 
-<div class="p-4 top-3.5 sm:ml-64 relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14" >
+<div class="top-3.5 sm:ml-64 relative overflow-x-auto shadow-md ">
+    <div class="p-4 rounded-lg dark:border-gray-700 mt-14 roud" >
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-16 py-3">
-                    <span class="sr-only">Image</span>
+              
+                <th scope="col" class="px-6 py-3">
+                    Nome
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Produto
+                    CPF/CNPJ
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Quantidade
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Categoria
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Action
+                    Email
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
+               
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
+                    João Silva
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
+                    123.456.789-00
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
+                    joao.silva@example.com
                 </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
+                
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
+                
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
+                    Maria Oliveira
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
+                    987.654.321-11
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
+                    maria.oliveira@fakeemail.com
                 </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
+              
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
+                
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
+                    Pedro Souza
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
+                    159.753.486-22
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
+                    pedro.souza@mydomain.net
                 </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
+                
             </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="p-4">
-                    <img src="#" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    Apple Watch
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text">
-                    50
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
-                </td>
-            </tr>
+            
             
         </tbody>
     </table>
