@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar.vue'
 
 <Sidebar />
 
-<div class="top-3.5 sm:ml-64 relative overflow-x-auto">
+<div class="top-3.5 sm:ml-64 relative overflow-x-auto bg-teal-950 rounded">
     
     <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
 <div class="relative mb-6">
