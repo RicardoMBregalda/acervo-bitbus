@@ -5,4 +5,5 @@ import Sidebar from '../components/Sidebar.vue'
 
 <template>
     <Sidebar />
+    <!-- <slot></slot> -->
 </template>
