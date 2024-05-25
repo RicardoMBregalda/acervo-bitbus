@@ -4,7 +4,7 @@
     <aside id="default-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-teal-50 dark:bg-teal-800">
+        <div class="h-full px-3 py-4  overflow-y-auto bg-teal-100 dark:bg-teal-950">
             <ul class="space-y-2 font-medium">
                 <router-link to="/" class="flex ms-2 md:me-24">
                     <img src="../assets/logo-bitbus_3.png" class="h-8 me-3" alt="Bit Bus Logo" />
@@ -13,8 +13,8 @@
                 </router-link>
                 <li>
                     <router-link to="/"
-                        class="flex items-center p-2 text-teal-900 rounded-lg dark:text-white hover:bg-teal-100 dark:hover:bg-teal-700 group">
-                        <svg class="w-5 h-5 text-teal-500 transition duration-75 dark:text-teal-400 group-hover:text-teal-900 dark:group-hover:text-white"
+                        class="mt-6 flex items-center p-2 text-teal-900 rounded-lg dark:text-white hover:bg-teal-200 dark:hover:bg-teal-800 group">
+                        <svg class="w-5 h-5 text-teal-900 transition duration-75 dark:text-teal-400 group-hover:text-teal-950 dark:group-hover:text-teal-200"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 22 21">
                             <path
@@ -27,8 +27,8 @@
                 </li>
                 <li>
                     <router-link to="/acervo/index"
-                        class="flex items-center p-2 text-teal-900 rounded-lg dark:text-white hover:bg-teal-100 dark:hover:bg-teal-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-teal-500 transition duration-75 dark:text-teal-400 group-hover:text-teal-900 dark:group-hover:text-white"
+                        class="flex items-center p-2 text-teal-900 rounded-lg dark:text-white hover:bg-teal-200 dark:hover:bg-teal-800 group">
+                        <svg class="flex-shrink-0 w-5 h-5 text-teal-900 transition duration-75 dark:text-teal-400 group-hover:text-teal-950 dark:group-hover:text-teal-200"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 20">
                             <path
@@ -39,8 +39,8 @@
                 </li>
                 <li>
                     <router-link to="/visitante/index"
-                        class="flex items-center p-2 text-teal-900 rounded-lg dark:text-white hover:bg-teal-100 dark:hover:bg-teal-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-teal-500 transition duration-75 dark:text-teal-400 group-hover:text-teal-900 dark:group-hover:text-white"
+                        class="flex items-center p-2 text-teal-900 rounded-lg dark:text-white hover:bg-teal-200 dark:hover:bg-teal-800 group">
+                        <svg class="flex-shrink-0 w-5 h-5 text-teal-900 transition duration-75 dark:text-teal-400 group-hover:text-teal-950 dark:group-hover:text-teal-200"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 18">
                             <path
@@ -51,8 +51,8 @@
                 </li>
                 <li>
                     <router-link to="/visita/index"
-                        class="flex items-center p-2 text-teal-900 rounded-lg dark:text-white hover:bg-teal-100 dark:hover:bg-teal-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-teal-500 transition duration-75 dark:text-teal-400 group-hover:text-teal-900 dark:group-hover:text-white"
+                        class="flex items-center p-2 text-teal-900 rounded-lg dark:text-white hover:bg-teal-200 dark:hover:bg-teal-800 group">
+                        <svg class="flex-shrink-0 w-5 h-5 text-teal-900 transition duration-75 dark:text-teal-400 group-hover:text-teal-950 dark:group-hover:text-teal-200"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 18">
                             <path
