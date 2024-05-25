@@ -63,7 +63,7 @@ const visitas = [
         <tbody>
           <tr v-for="(visita) in visitas" :key="visita.id"
             class="bg-white border-b dark:bg-teal-800 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-600">
-            <td class="px-6 py-4 font-semibold text-teal-900 da rk:text-white">
+            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ visita.descricao }}
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
