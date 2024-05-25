@@ -4,13 +4,9 @@ import QuantityInput from '../../components/QuantityInput.vue';
 import Sidebar from '../../components/Sidebar.vue';
 
 // Estado reativo para armazenar a lista de produtos
-const produtos = ref([
-    { codigo: 243, descricao: 'produto para testar a listagem', quantidade: 2 }
-]);
-const visitantes = ref([
-    { nome: "Ricardo Bregalda", tipo: "PF", documento: "21312313123" }
-]);
-// Estados reativos pa;ra os campos de entrada
+const produtos = ref([]);
+const visitantes = ref([]);
+// Estados reativos para os campos de entrada
 const novoCodigo = ref('');
 const novaDescricao = ref('');
 const novaQuantidade = ref('');
@@ -18,6 +14,7 @@ const novaQuantidade = ref('');
 const novoNome = ref('');
 const novoTipo = ref('');
 const novoDocumento = ref('');
+const novoEmail = ref('');
 
 // Função para adicionar um novo produto à lista
 const adicionarProduto = () => {
@@ -43,6 +40,7 @@ const adicionarVisitante = () => {
             nome: novoNome.value,
             tipo: novoTipo.value,
             documento: novoDocumento.value,
+            email: novoEmail.value,
         });
         // Limpar os campos de entrada após adicionar o visitante
         novoNome.value = '';
@@ -68,8 +66,9 @@ const removerVisitante = (index) => {
 <template>
     <Sidebar />
     <div class="p-10 sm:ml-64 relative overflow-x-auto ">
-        <h1 class=" text-3xl text-teal-900 dark:text-white mb-5"> Cadastrar Visita</h1>
-        <div class="max-w-mg grid mx-auto grid-cols-12">
+
+        <div class="max-w-6xl grid mx-auto grid-cols-12">
+            <h1 class="col-span-12 text-3xl text-teal-900 dark:text-white mb-5">Cadastrar Visita</h1>
             <div class="mb-5 col-span-12">
                 <label for="organizador"
                     class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Organizador</label>
@@ -126,14 +125,7 @@ const removerVisitante = (index) => {
                     required />
             </div>
 
-            <div class="mb-5 col-span-12">
-                <label for="descricao"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Descrição</label>
-                <textarea id="descricao" rows="4"
-                    class="block p-2.5 w-full text-sm text-teal-900 bg-teal-50 rounded-lg border border-teal-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-                    placeholder="Descreva a visita..."></textarea>
 
-            </div>
 
             <!-- Tabela de produtos -->
             <div class="col-span-12 relative overflow-x-auto shadow-md sm:rounded-lg mb-5">
@@ -200,7 +192,7 @@ const removerVisitante = (index) => {
             </div>
             <div class="mb-5 ml-5 mt-7 col-span-1">
                 <button type="button" @click="adicionarProduto"
-                    class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
+                    class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                     Adicionar
                 </button>
             </div>
@@ -208,12 +200,13 @@ const removerVisitante = (index) => {
             <div class="col-span-12 relative overflow-x-auto shadow-md sm:rounded-lg mb-5">
                 <label for="produtos"
                     class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Visitantes</label>
-                <table class="table-auto w-full text-sm text-left rtl:text-right text-teal-500 dark:text-teal-400">
+                <table class="w-full text-sm text-left rtl:text-right text-teal-500 dark:text-teal-400">
                     <thead class="text-xs text-teal-700 uppercase bg-teal-50 dark:bg-teal-700 dark:text-teal-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">Nome</th>
-                            <th scope="col" class="px-6 py-3" style="width: 10%">Tipo</th>
+                            <th scope="col" class="px-6 py-3" style="width: 5%">Tipo</th>
                             <th scope="col" class="px-6 py-3" style="width: 20%">CPF/CNPJ</th>
+                            <th scope="col" class="px-6 py-3">email</th>
                             <th scope="col" class="px-6 py-3 " style="width:3%"></th>
                         </tr>
                     </thead>
@@ -231,6 +224,9 @@ const removerVisitante = (index) => {
                                 {{ visitante.documento }}
                             </td>
                             <td class="px-6 py-4 font-medium text-teal-900 whitespace-nowrap dark:text-white">
+                                {{ visitante.email }}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-teal-900 whitespace-nowrap dark:text-white">
                                 <button @click="removerVisitante(index)" class="focus:outline-none">
                                     <svg class="mx-auto w-[16px] h-[16px] text-red-600 hover:text-red-900"
                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -246,7 +242,7 @@ const removerVisitante = (index) => {
                 </table>
             </div>
             <!-- Campos para adicionar novo produto -->
-            <div class="mb-5 col-span-7">
+            <div class="mb-5 col-span-8">
                 <label for="novoNome" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Nome</label>
                 <input type="text" id="novoNome" v-model="novoNome"
                     class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
@@ -268,13 +264,27 @@ const removerVisitante = (index) => {
                     class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block  w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                     placeholder="CPF/CNPJ" />
             </div>
-            <div class="mb-5 ml-5 mt-7 col-span-1">
+            <div class="mb-5 col-span-10">
+                <label for="novoEmail"
+                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">E-mail</label>
+                <input id="novoEmail" v-model="novoEmail"
+                    class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block  w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                    placeholder="nome@email.com" />
+            </div>
+            <div class="mb-5 ml-5 mt-7 col-span-2">
                 <button type="button" @click="adicionarVisitante"
                     class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                     Adicionar
                 </button>
             </div>
+            <div class="mb-5 col-span-12">
+                <label for="descricao"
+                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Descrição</label>
+                <textarea id="descricao" rows="4"
+                    class="block p-2.5 w-full text-sm text-teal-900 bg-teal-50 rounded-lg border border-teal-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                    placeholder="Descreva a visita..."></textarea>
 
+            </div>
             <button type="submit"
                 class="mt-6 col-span-12 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                 Salvar

@@ -12,14 +12,14 @@ const visitas = [
   {
     id: 2,
     organizador: "Lorenzo",
-    cidade: "PF",
+    cidade: "Porto Alegre",
     descricao: "Segunda visita",
     numParticipantes: "30"
   },
   {
     id: 3,
     organizador: "Alan",
-    cidade: "PF",
+    cidade: "Santa Maria",
     descricao: "Terceira visita",
     numParticipantes: "50"
   },
@@ -75,6 +75,7 @@ const visitas = [
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ visita.numParticipantes }}
             </td>
+
           </tr>
         </tbody>
       </table>
