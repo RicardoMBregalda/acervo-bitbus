@@ -67,8 +67,8 @@ const removerVisitante = (index) => {
 
 <template>
     <Sidebar />
-
     <div class="p-10 sm:ml-64 relative overflow-x-auto ">
+        <h1 class=" text-3xl text-teal-900 dark:text-white mb-5"> Cadastrar Visita</h1>
         <div class="max-w-mg grid mx-auto grid-cols-12">
             <div class="mb-5 col-span-12">
                 <label for="organizador"
