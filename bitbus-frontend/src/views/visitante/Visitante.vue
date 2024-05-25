@@ -43,7 +43,7 @@ const visitantes = [
     <div class="flex justify-end mx-4">
       <router-link to="/visitante/form">
         <button type="button"
-          class="px-6 py-3.5 text-base font-medium text-teal-700 inline-flex items-center bg-teal-200 hover:bg-teal-400 focus:ring-4 focus:outline-none focus:ring-teal-100 rounded-lg text-center dark:bg-teal-600 dark:hover:bg-teal-800 dark:focus:ring-teal-800">
+          class="px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 rounded-lg text-center dark:bg-teal-600 dark:hover:bg-teal-800 dark:focus:ring-teal-800">
           Cadastrar
         </button>
       </router-link>
