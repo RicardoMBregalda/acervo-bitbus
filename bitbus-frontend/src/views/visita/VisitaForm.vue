@@ -3,9 +3,10 @@ import { ref } from 'vue';
 import QuantityInput from '../../components/QuantityInput.vue';
 import Sidebar from '../../components/Sidebar.vue';
 
-// Estado reativo para armazenar a lista de produtos
+// Estado reativo para armazenar as listas
 const produtos = ref([]);
 const visitantes = ref([]);
+
 // Estados reativos para os campos de entrada
 const novoCodigo = ref('');
 const novaDescricao = ref('');
@@ -67,8 +68,13 @@ const removerVisitante = (index) => {
     <Sidebar />
     <div class="p-10 sm:ml-64 relative overflow-x-auto ">
 
-        <div class="max-w-6xl grid mx-auto grid-cols-12">
+        <div class="max-w-5xl grid mx-auto grid-cols-12">
             <h1 class="col-span-12 text-3xl text-teal-900 dark:text-white mb-5">Cadastrar Visita</h1>
+
+
+
+            <h2 class="col-span-12 text-2xl text-teal-900 dark:text-white mb-5">Dados Gerais</h2>
+
             <div class="mb-5 col-span-12">
                 <label for="organizador"
                     class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Organizador</label>
@@ -126,11 +132,19 @@ const removerVisitante = (index) => {
             </div>
 
 
+            <div class="mb-5 col-span-12">
+                <label for="descricao"
+                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Descrição</label>
+                <textarea id="descricao" rows="4"
+                    class="block p-2.5 w-full text-sm text-teal-900 bg-teal-50 rounded-lg border border-teal-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                    placeholder="Descreva a visita..."></textarea>
+
+            </div>
+
+            <h2 class="col-span-12 text-2xl text-teal-900 dark:text-white mb-5">Acervo</h2>
 
             <!-- Tabela de produtos -->
             <div class="col-span-12 relative overflow-x-auto shadow-md sm:rounded-lg mb-5">
-                <label for="produtos"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Produtos</label>
                 <table class="table-auto w-full text-sm text-left rtl:text-right text-teal-500 dark:text-teal-400">
                     <thead class="text-xs text-teal-700 uppercase bg-teal-50 dark:bg-teal-700 dark:text-teal-400">
                         <tr>
@@ -196,10 +210,10 @@ const removerVisitante = (index) => {
                     Adicionar
                 </button>
             </div>
+            <h2 class="col-span-12 text-2xl text-teal-900 dark:text-white mb-5">Visitantes</h2>
 
             <div class="col-span-12 relative overflow-x-auto shadow-md sm:rounded-lg mb-5">
-                <label for="produtos"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Visitantes</label>
+
                 <table class="w-full text-sm text-left rtl:text-right text-teal-500 dark:text-teal-400">
                     <thead class="text-xs text-teal-700 uppercase bg-teal-50 dark:bg-teal-700 dark:text-teal-400">
                         <tr>
@@ -277,14 +291,7 @@ const removerVisitante = (index) => {
                     Adicionar
                 </button>
             </div>
-            <div class="mb-5 col-span-12">
-                <label for="descricao"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Descrição</label>
-                <textarea id="descricao" rows="4"
-                    class="block p-2.5 w-full text-sm text-teal-900 bg-teal-50 rounded-lg border border-teal-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-                    placeholder="Descreva a visita..."></textarea>
 
-            </div>
             <button type="submit"
                 class="mt-6 col-span-12 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                 Salvar
