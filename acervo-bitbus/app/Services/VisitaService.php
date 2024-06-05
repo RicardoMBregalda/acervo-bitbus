@@ -20,6 +20,11 @@ class VisitaService {
         return $visita;
     }
 
+    public function index(): array
+    {
+        return Visita::all()->toArray();
+    }
+
     public function find(int $id): Visita
     {
         return Visita::findOrFail($id);
@@ -27,16 +32,26 @@ class VisitaService {
 
     public function update(int $id, VisitaDTO $data): Visita
     {
-        $user = Visita::findOrFail($id);
-        $user->update($data);
+        $visita = Visita::findOrFail($id);
 
-        return $user;
+        if (!$visita) {
+            return false;
+        }
+
+        $visita->update($data);
+
+        return $visita;
     }
 
     public function delete(int $id): bool
     {
-        $user = Visita::findOrFail($id);
-        $result = $user->delete();
+        $visita = Visita::findOrFail($id);
+
+        if (!$visita) {
+            return false;
+        }       
+
+        $result = $visita->delete();
         
         return $result;
     }

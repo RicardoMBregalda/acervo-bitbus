@@ -16,6 +16,13 @@ class UserController extends Controller
         $this->visitaService = $visitaService;
     }
 
+    public function index()
+    {
+        $visitas = $this->visitaService->index();
+        
+        return response()->json(['data' => $visitas]);
+    }
+
     public function store(Request $request)
     {
         $visitaDTO = $this->createVisitaDTO($request);
