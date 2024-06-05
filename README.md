@@ -58,7 +58,7 @@ Como administrador quero registrar e gerenciar as doações recebidas, seja em d
 
 - Gerenciamento de Acervo Tecnológico
 - Agendamento de Visitas Itinerantes
-- Registro de Pariticpantes
+- Registro de Participantes
 
 
 # Sprint 2
