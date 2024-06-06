@@ -4,6 +4,10 @@ import QuantityInput from '../../components/QuantityInput.vue';
 import Sidebar from '../../components/Sidebar.vue';
 import axios from 'axios';
 import { onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
 
 const produtosLista = ref([]);
 const visitantesLista = ref([]);
@@ -33,12 +37,26 @@ const novoTipo = ref('');
 const novoDocumento = ref('');
 const novoEmail = ref('');
 
+
+const fetchVisita = async (id) => {
+    const response = await axios.get(`http://localhost:8000/api/visita/${id}`);
+    form.value = response.data.data;
+    produtosLista.value = response.data.data.produtos;
+    visitantesLista.value = response.data.data.participantes;
+};
+
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8000/api/produto');
     produtos.value = response.data.data;
+
     const secondResponse = await axios.get('http://localhost:8000/api/participante');
     visitantes.value = secondResponse.data.data;
+
+    if (route.params.id) {
+        await fetchVisita(route.params.id);
+    }
+
   } catch (error) {
     console.error('Error fetching data', error);
   }
@@ -88,12 +106,19 @@ async function handleSubmit(data) {
     data.participantes = visitantesLista.value;
     console.log("data",data)
     try {
-        const response = await axios.post('http://localhost:8000/api/visita', data);
-        if (response) {
-            router.push({ name: 'Visitas' });
+        if (route.params.id) {
+            const response = await axios.put(`http://localhost:8000/api/visita/${route.params.id}`, data);
+            if (response) {
+                router.push({ name: 'Visitas' });
+            }
+        } else {
+            const response = await axios.post('http://localhost:8000/api/visita', data);
+            if (response) {
+                router.push({ name: 'Visitas' });
+            }
         }
     } catch (error) {
-        console.error('Houve um erro ao adicionar o participante:', error);
+        console.error('Houve um erro ao adicionar a visita:', error);
     }
 }
 </script>

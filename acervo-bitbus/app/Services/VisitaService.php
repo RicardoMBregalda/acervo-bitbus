@@ -37,7 +37,7 @@ class VisitaService {
 
     public function find(int $id): Visita
     {
-        return Visita::findOrFail($id);
+        return Visita::with(['produtos', 'participantes'])->findOrFail($id);
     }
 
     public function update(int $id, VisitaDTO $data): Visita
@@ -79,11 +79,23 @@ class VisitaService {
             if (!isset($participante['id'])) {
                 $participanteDTO = ParticipanteDTO::fromValidatedData($participante);
                 $part = $this->participanteService->create($participanteDTO);
-                $visita->participante()->attach($part->id);
+                $visita->participantes()->attach($part->id);
             } else {
-                $visita->participante()->attach($participante['id']);
+                $visita->participantes()->attach($participante['id']);
             }
         }
+    }
+
+    public function updateProdutosVisita(Visita $visita, array $produtosLista): void
+    {
+        $visita->produtos()->detach();
+        $this->saveProdutosVisita($visita, $produtosLista);
+    }
+
+    public function updateParticipantesVisita(Visita $visita, array $participantesLista): void
+    {
+        $visita->participantes()->detach();
+        $this->saveParticipantesVisita($visita, $participantesLista);
     }
 
 }

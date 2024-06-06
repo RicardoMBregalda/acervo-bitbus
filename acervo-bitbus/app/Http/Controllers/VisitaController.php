@@ -43,7 +43,7 @@ class VisitaController extends Controller
         if (!empty($produtosLista)) {
             $this->visitaService->saveParticipantesVisita($visita, $participantesLista);
         }
-        
+
         return response()->json(['message' => 'Visita created successfully!', 'data' => $visita]);
     }
 
@@ -61,14 +61,25 @@ class VisitaController extends Controller
     public function update(Request $request, int $id)
     {
         $visitaDTO = $this->createVisitaDTO($request);
+        
+        $produtosLista = $request->input('produtos');
+        $participantesLista = $request->input('participantes');
 
-        $user = $this->visitaService->update($id, $visitaDTO);
+        $visita = $this->visitaService->update($id, $visitaDTO);
 
-        if(!$user) {
+        if(!$visita) {
             return response()->json(['message' => 'Visita not updated, review your data!'], 404);
         }
 
-        return response()->json(['message' => 'Visita updated successfully!', 'data' => $user]);
+        if (!empty($produtosLista)) {
+            $this->visitaService->updateProdutosVisita($visita, $produtosLista);
+        }
+
+        if (!empty($produtosLista)) {
+            $this->visitaService->updateParticipantesVisita($visita, $participantesLista);
+        }
+
+        return response()->json(['message' => 'Visita updated successfully!', 'data' => $visita]);
     }
 
     

@@ -42,6 +42,12 @@ const routes = [
     name:'VisitaForm',
     component: VisitaForm,
   },
+  {
+    path:'/visita/form/:id',
+    name:'VisitaFormEdit',
+    component: VisitaForm,
+    props: true,
+  },
 ];
 
 const router = createRouter({

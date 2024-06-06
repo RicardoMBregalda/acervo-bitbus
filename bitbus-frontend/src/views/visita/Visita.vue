@@ -2,7 +2,9 @@
 import Sidebar from '../../components/Sidebar.vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const visitas = ref({})
 
 onMounted(async () => {
@@ -13,6 +15,10 @@ onMounted(async () => {
     console.error('Error fetching data', error);
   }
 });
+
+const editarVisita = (id) => {
+  router.push({ name: 'VisitaFormEdit', params: { id } });
+}
 
 </script>
 
@@ -72,6 +78,9 @@ onMounted(async () => {
             <th scope="col" class="px-6 py-3">
               N Participantes
             </th>
+            <th scope="col" class="px-6 py-3">
+              Ações
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -96,7 +105,11 @@ onMounted(async () => {
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ visita.numParticipantes }}
             </td>
-
+            <td class="px-6 py-4">
+              <div class="flex items">
+                <button type="button" @click="editarVisita(visita.id)">Editar</button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
