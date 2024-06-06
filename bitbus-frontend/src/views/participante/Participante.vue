@@ -1,6 +1,19 @@
 <script setup>
 import Sidebar from '../../components/Sidebar.vue';
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
 
+const participantes = ref({})
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/participante');
+    participantes.value = response.data.data;
+    console.log(response);
+  } catch (error) {
+    console.error('Error fetching data', error);
+  }
+});
 
 </script>
 
