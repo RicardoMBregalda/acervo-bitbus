@@ -1,29 +1,19 @@
 <script setup>
 import Sidebar from '../../components/Sidebar.vue';
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
 
-const visitas = [
-  {
-    id: 1,
-    organizador: "Ricardo",
-    cidade: "Bento Gonçalves",
-    descricao: "Primeira visita",
-    numParticipantes: "70"
-  },
-  {
-    id: 2,
-    organizador: "Lorenzo",
-    cidade: "Porto Alegre",
-    descricao: "Segunda visita",
-    numParticipantes: "30"
-  },
-  {
-    id: 3,
-    organizador: "Alan",
-    cidade: "Santa Maria",
-    descricao: "Terceira visita",
-    numParticipantes: "50"
-  },
-]
+const visitas = ref({})
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/visita');
+    visitas.value = response.data.data;
+    console.log(response);
+  } catch (error) {
+    console.error('Error fetching data', error);
+  }
+});
 
 </script>
 
