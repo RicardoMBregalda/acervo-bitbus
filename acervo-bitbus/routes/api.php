@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VisitaController;
+use App\Http\Controllers\ParticipanteController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -12,3 +13,9 @@ Route::get('visita', [VisitaController::class, 'index']);
 Route::get('visita/{id}', [VisitaController::class, 'show']);
 Route::put('visita/{id}', [VisitaController::class, 'update']);
 Route::delete('visita/{id}', [VisitaController::class, 'delete']);
+
+Route::post('participante', [ParticipanteController::class, 'store']);
+Route::get('participante', [ParticipanteController::class, 'index']);
+Route::get('participante/{id}', [ParticipanteController::class, 'show']);
+Route::put('participante/{id}', [ParticipanteController::class, 'update']);
+Route::delete('participante/{id}', [ParticipanteController::class, 'delete']);
