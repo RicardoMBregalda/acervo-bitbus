@@ -9,7 +9,6 @@ onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8000/api/visita');
     visitas.value = response.data.data;
-    console.log(response);
   } catch (error) {
     console.error('Error fetching data', error);
   }

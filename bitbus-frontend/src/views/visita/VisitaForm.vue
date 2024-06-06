@@ -2,48 +2,55 @@
 import { ref } from 'vue';
 import QuantityInput from '../../components/QuantityInput.vue';
 import Sidebar from '../../components/Sidebar.vue';
+import axios from 'axios';
+import { onMounted } from 'vue';
 
-// Estado reativo para armazenar as listas
-const produtos = ref([]);
-const visitantes = ref([]);
+const produtosLista = ref([]);
+const visitantesLista = ref([]);
 
-// Estados reativos para os campos de entrada
-const novoCodigo = ref('');
-const novaDescricao = ref('');
-const novaQuantidade = ref('');
+const form = ref({
+    organizador: '',
+    endereco: '',
+    cidade: '',
+    estado: '',
+    descricao: '',
+    data_inicio: '',
+    data_fim: '',
+});
+
+const novoProduto = ref({});
 
 const novoNome = ref('');
 const novoTipo = ref('');
 const novoDocumento = ref('');
 const novoEmail = ref('');
 
-// Função para adicionar um novo produto à lista
+const produtos = ref({})
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/produto');
+    produtos.value = response.data.data;
+  } catch (error) {
+    console.error('Error fetching data', error);
+  }
+});
+
 const adicionarProduto = () => {
-    if (novoCodigo.value && novaDescricao.value && novaQuantidade.value) {
-        produtos.value.push({
-            codigo: novoCodigo.value,
-            descricao: novaDescricao.value,
-            quantidade: parseInt(novaQuantidade.value, 10)
-        });
-        // Limpar os campos de entrada após adicionar o produto
-        novoCodigo.value = '';
-        novaDescricao.value = '';
-        novaQuantidade.value = '';
-    } else {
-        alert('Por favor, preencha todos os campos.');
+    if (novoProduto) {
+        produtosLista.value.push(novoProduto.value);
+        novoProduto.value = {};
     }
 };
 
-// Função para adicionar um novo visitante à lista
 const adicionarVisitante = () => {
     if (novoNome.value && novoTipo.value && novoDocumento.value) {
-        visitantes.value.push({
+        visitantesLista.value.push({
             nome: novoNome.value,
             tipo: novoTipo.value,
             documento: novoDocumento.value,
             email: novoEmail.value,
         });
-        // Limpar os campos de entrada após adicionar o visitante
         novoNome.value = '';
         novoTipo.value = '';
         novoDocumento.value = '';
@@ -52,16 +59,38 @@ const adicionarVisitante = () => {
     }
 };
 
-// Função para remover um produto da lista com base no índice
 const removerProduto = (index) => {
-    produtos.value.splice(index, 1);
+    produtosLista.value.splice(index, 1);
 };
-// Função para remover um visitante da lista com base no índice
 
 const removerVisitante = (index) => {
-    visitantes.value.splice(index, 1);
+    visitantesLista.value.splice(index, 1);
 };
 
+function convertDateFormat(dateStr) {
+    const parts = dateStr.split('/');
+
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+
+    const formattedDate = `${year}-${month}-${day}`;
+
+    return formattedDate;
+}
+
+async function handleSubmit(data) {
+    data.data_inicio = convertDateFormat(data.data_inicio);
+    data.data_fim = convertDateFormat(data.data_fim);
+    try {
+        const response = await axios.post('http://localhost:8000/api/visita', data);
+        if (response) {
+            router.push({ name: 'Visitas' });
+        }
+    } catch (error) {
+        console.error('Houve um erro ao adicionar o participante:', error);
+    }
+}
 </script>
 
 <template>
@@ -71,20 +100,18 @@ const removerVisitante = (index) => {
         <div class="max-w-5xl grid mx-auto grid-cols-12">
             <h1 class="col-span-12 text-3xl text-teal-900 dark:text-white mb-5">Cadastrar Visita</h1>
 
-
-
             <h2 class="col-span-12 text-2xl text-teal-900 dark:text-white mb-5">Dados Gerais</h2>
 
             <div class="mb-5 col-span-12">
                 <label for="organizador"
                     class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Organizador</label>
-                <input type="text" id="organizador"
+                <input type="text" id="organizador" v-model="form.organizador"
                     class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
                     placeholder="Fulano de Tal" required />
             </div>
             <div class="mb-5 col-span-1">
                 <label for="estado" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Estado</label>
-                <select id="estado"
+                <select id="estado" v-model="form.estado"
                     class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500">
                     <option value="">Selecione...</option>
                     <option value="AC">AC</option>
@@ -118,7 +145,7 @@ const removerVisitante = (index) => {
             </div>
             <div class="mb-5 ml-5 col-span-11">
                 <label for="cidade" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Cidade</label>
-                <input type="cidade" id="cidade"
+                <input type="text" id="cidade" v-model="form.cidade"
                     class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
                     required />
             </div>
@@ -126,7 +153,7 @@ const removerVisitante = (index) => {
             <div class="mb-5 col-span-12">
                 <label for="endereco"
                     class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Endereço</label>
-                <input type="endereco" id="endereco"
+                <input type="text" id="endereco" v-model="form.endereco"
                     class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
                     required />
             </div>
@@ -135,10 +162,45 @@ const removerVisitante = (index) => {
             <div class="mb-5 col-span-12">
                 <label for="descricao"
                     class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Descrição</label>
-                <textarea id="descricao" rows="4"
+                <textarea 
+                    v-model="form.descricao"
+                    id="descricao" 
+                    rows="4" 
                     class="block p-2.5 w-full text-sm text-teal-900 bg-teal-50 rounded-lg border border-teal-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-                    placeholder="Descreva a visita..."></textarea>
+                    placeholder="Descreva a visita..."
+                >
+                </textarea>
+            </div>
+            
+            <div class="mb-5 col-span-6">
+                <label 
+                    for="data_inicio"
+                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white"
+                >
+                    Data de Início
+                </label>
+                <input 
+                    v-model="form.data_inicio"
+                    type="date"
+                    id="data_inicio" 
+                    class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                    required
+                />
+            </div>
 
+            <div class="mb-5 ml-5 col-span-6">
+                <label 
+                    for="data_fim"
+                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white"
+                >
+                    Data de Fim
+                </label>
+                <input 
+                    v-model="form.data_fim"
+                    type="date"
+                    id="data_inicio" 
+                    class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                />
             </div>
 
             <h2 class="col-span-12 text-2xl text-teal-900 dark:text-white mb-5">Acervo</h2>
@@ -149,20 +211,20 @@ const removerVisitante = (index) => {
                     <thead class="text-xs text-teal-700 uppercase bg-teal-50 dark:bg-teal-700 dark:text-teal-400">
                         <tr>
                             <th scope="col" class="px-6 py-3" style="width: 10%">Código</th>
-                            <th scope=" col" class="px-6 py-3">Descrição</th>
+                            <th scope=" col" class="px-6 py-3">Nome</th>
                             <th scope="col" class="px-6 py-3" style="width: 20%">Quantidade</th>
                             <th scope="col" class="px-6 py-3 " style="width:3%"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for=" (produto, index) in produtos" :key="index"
+                        <tr v-for=" (produto, index) in produtosLista" :key="index"
                             class="bg-white border-b dark:bg-teal-800 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-600">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-teal-900 whitespace-nowrap dark:text-white">
                                 {{ produto.codigo }}
                             </th>
                             <td class="px-6 py-4 font-medium text-teal-900 whitespace-nowrap dark:text-white">
-                                {{ produto.descricao }}
+                                {{ produto.nome }}
                             </td>
                             <td class="px- py-4">
                                 <QuantityInput :initialQuantity="produto.quantidade" />
@@ -183,28 +245,16 @@ const removerVisitante = (index) => {
                 </table>
             </div>
             <!-- Campos para adicionar novo produto -->
-            <div class="mb-5 col-span-1">
-                <label for="novoCodigo"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Código</label>
-                <input type="text" id="novoCodigo" v-model="novoCodigo"
-                    class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
-                    placeholder="Código do Produto" />
+            <div class="col-span-10">
+                <select id="produto" v-model="novoProduto"
+                    class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500">
+                    <option value="" disabled class="text-white">Selecione um produto</option>
+                    <option v-for="produto in produtos" :key="produto.id" :value="produto">
+                        {{ produto.nome }}
+                    </option>
+                </select>
             </div>
-            <div class="mb-5 ml-5 col-span-9">
-                <label for="novaDescricao"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Descrição</label>
-                <input type="text" id="novaDescricao" v-model="novaDescricao"
-                    class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
-                    placeholder="Descrição do Produto" />
-            </div>
-            <div class="mb-5 ml-5 col-span-1">
-                <label for="novaQuantidade"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Quantidade</label>
-                <input type="number" id="novaQuantidade" v-model="novaQuantidade"
-                    class="all:unset appearance-none shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
-                    placeholder="Qtd" />
-            </div>
-            <div class="mb-5 ml-5 mt-7 col-span-1">
+            <div class="ml-5 col-span-2">
                 <button type="button" @click="adicionarProduto"
                     class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                     Adicionar
@@ -225,7 +275,7 @@ const removerVisitante = (index) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for=" (visitante, index) in visitantes" :key="index"
+                        <tr v-for=" (visitante, index) in visitantesLista" :key="index"
                             class="bg-white border-b dark:bg-teal-800 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-600">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-teal-900 whitespace-nowrap dark:text-white">
@@ -292,7 +342,7 @@ const removerVisitante = (index) => {
                 </button>
             </div>
 
-            <button type="submit"
+            <button type="button" @click="handleSubmit(form)"
                 class="mt-6 col-span-12 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                 Salvar
             </button>
