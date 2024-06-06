@@ -2,8 +2,10 @@
 import { ref, watch } from 'vue';
 import Sidebar from '../../components/Sidebar.vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
+const route = useRoute();
 const tipo = ref('PF');
 const identificacaoLabel = ref('CPF');
 const identificacaoPlaceholder = ref('000.000.000-00');
@@ -26,16 +28,44 @@ watch(form.value, (newValue) => {
     }
 });
 
+
 async function handleSubmit(data) {
+    console.log("data", data)
     try {
-        const response = await axios.post('http://localhost:8000/api/participante', data);
-        if (response) {
-            router.push({ name: 'Participantes' });
+        if (route.params.id) {
+            const response = await axios.put(`http://localhost:8000/api/participante/${route.params.id}`, data);
+            if (response) {
+                router.push({ name: 'Participantes' });
+            }
+        } else {
+            const response = await axios.post('http://localhost:8000/api/participante', data);
+            if (response) {
+                router.push({ name: 'Participantes' });
+            }
         }
     } catch (error) {
-        console.error('Houve um erro ao adicionar o participante:', error);
+        console.error('Houve um erro ao adicionar a participante:', error);
     }
 }
+
+const fetchParticipate = async (id) => {
+    const response = await axios.get(`http://localhost:8000/api/participante/${id}`);
+    form.value = response.data.data;
+
+};
+
+onMounted(async () => {
+    try {
+
+        if (route.params.id) {
+            await fetchParticipate(route.params.id);
+        }
+
+    } catch (error) {
+        console.error('Error fetching data', error);
+    }
+});
+
 
 
 </script>

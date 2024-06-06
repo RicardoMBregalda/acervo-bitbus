@@ -32,6 +32,9 @@ async function removerParticipante(id) {
 
 };
 
+const editarParticipante = (id) => {
+  router.push({ name: 'ParticipanteFormEdit', params: { id } });
+}
 
 </script>
 <template>
@@ -91,6 +94,9 @@ async function removerParticipante(id) {
             <th scope="col" class="px-6 py-3" style="width:3%">
 
             </th>
+            <th scope="col" class="px-6 py-3" style="width:3%">
+
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -114,6 +120,9 @@ async function removerParticipante(id) {
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ participante.email }}
+            </td>
+            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
+              <button type="button" @click="editarParticipante(participante.id)">Editar</button>
             </td>
             <td class="px-6 py-4 font-medium text-teal-900 whitespace-nowrap dark:text-white">
               <button @click="removerParticipante(participante.id)" class="focus:outline-none">
