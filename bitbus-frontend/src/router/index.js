@@ -23,6 +23,12 @@ const routes = [
     component: ParticipanteForm,
   },
   {
+    path:'/participante/form/:id',
+    name:'ParticipanteFormEdit',
+    component: ParticipanteForm,
+    props: true,
+  },
+  {
     path:'/acervo/index',
     name:'Acervo',
     component: Acervo,
@@ -31,6 +37,12 @@ const routes = [
     path:'/acervo/form',
     name:'AcervoForm',
     component: AcervoForm,
+  },
+  {
+    path:'/acervo/form/:id',
+    name:'AcervoFormEdit',
+    component: AcervoForm,
+    props: true,
   },
   {
     path:'/visita/index',
