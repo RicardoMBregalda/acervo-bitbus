@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Participante;
+use App\DTO\ParticipanteDTO;
+use App\Services\ParticipanteService;
+
+class ParticipanteController extends Controller
+{
+    private ParticipanteService $participanteService;
+
+    public function __construct(ParticipanteService $participanteService)
+    {
+        $this->ParticipanteService = $participanteService;
+    }
+
+    public function index()
+    {
+        $participantes = $this->ParticipanteService->index();
+        
+        return response()->json(['data' => $participantes]);
+    }
+
+    public function store(Request $request)
+    {
+        $participanteDTO = $this->createParticipanteDTO($request);
+        
+        $participante = $this->ParticipanteService->create($participanteDTO);
+
+        if (!$participante) {
+            return response()->json(['message' => 'Participante not created, review your data!'], 500);
+        }
+
+        return response()->json(['message' => 'Participante created successfully!', 'data' => $participante]);
+    }
+
+    public function show(int $id)
+    {
+        $participante = $this->ParticipanteService->find($id);
+
+        if (!$participante) {
+            return response()->json(['message' => 'Participante not found!'], 404);
+        }
+
+        return response()->json(['data' => $participante]);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $participanteDTO = $this->createParticipanteDTO($request);
+
+        $user = $this->ParticipanteService->update($id, $participanteDTO);
+
+        if(!$user) {
+            return response()->json(['message' => 'Participante not updated, review your data!'], 404);
+        }
+
+        return response()->json(['message' => 'Participante updated successfully!', 'data' => $user]);
+    }
+
+    
+    public function delete($id)
+    {
+        $result = $this->ParticipanteService->delete($id);
+        
+        if (!$result) {
+            return response()->json(['message' => 'Participante not found!'], 404);
+        }
+        
+        return response()->json(['message' => 'Participante deleted successfully!']);
+    }
+    
+    private function createParticipanteDTO(Request $request): ParticipanteDTO 
+    {
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'tipo' => 'required|string|max:2',
+            'documento' => 'required|string|max:15',
+            'email' => 'required|string|max:255',
+        ]);
+
+        $userDTO = ParticipanteDTO::fromValidatedData($validatedData);
+
+        return $userDTO;
+    }
+}
