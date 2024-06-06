@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VisitaController;
 use App\Http\Controllers\ParticipanteController;
+use App\Http\Controllers\ProdutoController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -19,3 +20,9 @@ Route::get('participante', [ParticipanteController::class, 'index']);
 Route::get('participante/{id}', [ParticipanteController::class, 'show']);
 Route::put('participante/{id}', [ParticipanteController::class, 'update']);
 Route::delete('participante/{id}', [ParticipanteController::class, 'delete']);
+
+Route::post('produto', [ProdutoController::class, 'store']);
+Route::get('produto', [ProdutoController::class, 'index']);
+Route::get('produto/{id}', [ProdutoController::class, 'show']);
+Route::put('produto/{id}', [ProdutoController::class, 'update']);
+Route::delete('produto/{id}', [ProdutoController::class, 'delete']);

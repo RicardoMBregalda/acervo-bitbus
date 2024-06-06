@@ -18,16 +18,16 @@ class ParticipanteController extends Controller
 
     public function index()
     {
-        $participantes = $this->ParticipanteService->index();
-        
+        $participantes = $this->participanteService->index();
+
         return response()->json(['data' => $participantes]);
     }
 
     public function store(Request $request)
     {
         $participanteDTO = $this->createParticipanteDTO($request);
-        
-        $participante = $this->ParticipanteService->create($participanteDTO);
+
+        $participante = $this->participanteService->create($participanteDTO);
 
         if (!$participante) {
             return response()->json(['message' => 'Participante not created, review your data!'], 500);
@@ -38,7 +38,7 @@ class ParticipanteController extends Controller
 
     public function show(int $id)
     {
-        $participante = $this->ParticipanteService->find($id);
+        $participante = $this->participanteService->find($id);
 
         if (!$participante) {
             return response()->json(['message' => 'Participante not found!'], 404);
@@ -51,28 +51,28 @@ class ParticipanteController extends Controller
     {
         $participanteDTO = $this->createParticipanteDTO($request);
 
-        $user = $this->ParticipanteService->update($id, $participanteDTO);
+        $user = $this->participanteService->update($id, $participanteDTO);
 
-        if(!$user) {
+        if (!$user) {
             return response()->json(['message' => 'Participante not updated, review your data!'], 404);
         }
 
         return response()->json(['message' => 'Participante updated successfully!', 'data' => $user]);
     }
 
-    
+
     public function delete($id)
     {
-        $result = $this->ParticipanteService->delete($id);
-        
+        $result = $this->participanteService->delete($id);
+
         if (!$result) {
             return response()->json(['message' => 'Participante not found!'], 404);
         }
-        
+
         return response()->json(['message' => 'Participante deleted successfully!']);
     }
-    
-    private function createParticipanteDTO(Request $request): ParticipanteDTO 
+
+    private function createParticipanteDTO(Request $request): ParticipanteDTO
     {
         $validatedData = $request->validate([
             'nome' => 'required|string|max:255',
