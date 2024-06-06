@@ -2,8 +2,10 @@
 import { ref } from 'vue';
 import Sidebar from '../../components/Sidebar.vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
+const route = useRoute();
 const router = useRouter();
 const form = ref({
     codigo: "",
@@ -18,15 +20,42 @@ const form = ref({
 });
 
 async function handleSubmit(data) {
+    console.log("data", data)
     try {
-        const response = await axios.post('http://localhost:8000/api/produto', data);
-        if (response) {
-            router.push({ name: 'Acervo' });
+        if (route.params.id) {
+            const response = await axios.put(`http://localhost:8000/api/produto/${route.params.id}`, data);
+            if (response) {
+                router.push({ name: 'Acervo' });
+            }
+        } else {
+            const response = await axios.post('http://localhost:8000/api/produto', data);
+            if (response) {
+                router.push({ name: 'Acervo' });
+            }
         }
     } catch (error) {
-        console.error('Houve um erro ao adicionar o participante:', error);
+        console.error('Houve um erro ao adicionar a produto:', error);
     }
 }
+
+const fetchProduto = async (id) => {
+    const response = await axios.get(`http://localhost:8000/api/produto/${id}`);
+    form.value = response.data.data;
+
+};
+
+onMounted(async () => {
+    try {
+
+        if (route.params.id) {
+            await fetchProduto(route.params.id);
+        }
+
+    } catch (error) {
+        console.error('Error fetching data', error);
+    }
+});
+
 
 
 </script>

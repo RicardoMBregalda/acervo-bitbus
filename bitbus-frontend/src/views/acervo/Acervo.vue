@@ -2,6 +2,8 @@
 import Sidebar from '../../components/Sidebar.vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const acervos = ref({})
 
@@ -28,6 +30,11 @@ async function removerProduto(id) {
   }
 
 };
+
+const editarProduto = (id) => {
+  router.push({ name: 'AcervoFormEdit', params: { id } });
+}
+
 
 
 </script>
@@ -93,6 +100,10 @@ async function removerProduto(id) {
             <th scope="col" class="px-6 py-3">
               Ano
             </th>
+
+            <th scope="col" class="px-6 py-3" style="width:3%">
+
+            </th>
             <th scope="col" class="px-6 py-3" style="width:3%">
             </th>
 
@@ -115,7 +126,7 @@ async function removerProduto(id) {
               {{ acervo.codigo }}
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ acervo.mome }}
+              {{ acervo.informacoes }}
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ acervo.tipo }}
@@ -125,6 +136,9 @@ async function removerProduto(id) {
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ acervo.ano }}
+            </td>
+            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
+              <button type="button" @click="editarProduto(acervo.id)">Editar</button>
             </td>
             <td class="px-6 py-4 font-medium text-teal-900 whitespace-nowrap dark:text-white">
               <button @click="removerProduto(acervo.id)" class="focus:outline-none">
