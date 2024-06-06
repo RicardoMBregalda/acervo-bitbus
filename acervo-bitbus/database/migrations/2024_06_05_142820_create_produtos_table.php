@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('codigo');
             $table->string('nome');
+            $table->string('tipo');
             $table->integer('ano');
             $table->integer('quantidade');
             $table->string('dimensoes');
