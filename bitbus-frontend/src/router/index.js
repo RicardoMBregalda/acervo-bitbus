@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Participante from '../views/paticipante/Participante.vue';
-import ParticipanteForm from '../views/paticipante/ParticipanteForm.vue';
+import Participante from '../views/participante/Participante.vue';
+import ParticipanteForm from '../views/participante/ParticipanteForm.vue';
 import Acervo from '../views/acervo/Acervo.vue';
 import AcervoForm from '../views/acervo/AcervoForm.vue';
 import Visita from '../views/visita/Visita.vue';
