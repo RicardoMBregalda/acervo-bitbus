@@ -1,36 +1,6 @@
 <script setup>
 import Sidebar from '../../components/Sidebar.vue';
 
-const visitantes = [
-  {
-    id: 1,
-    nome: "Lorenzo",
-    tipo: "PF",
-    documento: "000.111.222-33",
-    email: "lorenzo@email.com"
-  },
-  {
-    id: 2,
-    nome: "Ricardo",
-    tipo: "PF",
-    documento: "000.111.222-33",
-    email: "ricardo@email.com"
-  },
-  {
-    id: 3,
-    nome: "Alan",
-    tipo: "PF",
-    documento: "000.111.222-33",
-    email: "alan@email.com"
-  },
-  {
-    id: 4,
-    nome: "Fraca",
-    tipo: "PJ",
-    documento: "000.111.222-33",
-    email: "fraca@email.com"
-  },
-]
 
 </script>
 
@@ -41,7 +11,7 @@ const visitantes = [
   <div class="flex flex-col top-3.5 sm:ml-64 relative overflow-x-auto pr-10">
 
     <div class="flex justify-end mx-4">
-      <router-link to="/visitante/form">
+      <router-link to="/participante/form">
         <button type="button"
           class="px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 rounded-lg text-center dark:bg-teal-600 dark:hover:bg-teal-800 dark:focus:ring-teal-800">
           Cadastrar
@@ -91,7 +61,7 @@ const visitantes = [
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(visitante) in visitantes" :key="visitante.id"
+          <tr v-for="(participante) in participantes" :key="participante.id"
             class="bg-white border-b dark:bg-teal-800 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-600">
             <td class="w-4 p-4">
               <div class="flex items-center">
@@ -101,16 +71,16 @@ const visitantes = [
               </div>
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ visitante.nome }}
+              {{ participante.nome }}
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ visitante.tipo }}
+              {{ participante.tipo }}
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ visitante.documento }}
+              {{ participante.documento }}
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ visitante.email }}
+              {{ participante.email }}
             </td>
           </tr>
         </tbody>

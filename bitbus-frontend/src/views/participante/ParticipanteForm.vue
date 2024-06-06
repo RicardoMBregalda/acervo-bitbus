@@ -22,7 +22,7 @@ watch(tipo, (newValue) => {
 
     <div class="p-10 sm:ml-64 relative overflow-x-auto">
         <div class="max-w-lg grid mx-auto grid-cols-12">
-            <h1 class="col-span-12 text-3xl text-teal-900 dark:text-white mb-5">Cadastrar Visitante</h1>
+            <h1 class="col-span-12 text-3xl text-teal-900 dark:text-white mb-5">Cadastrar Participante</h1>
 
             <div class="mb-5 col-span-12">
                 <label for="name" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Nome</label>

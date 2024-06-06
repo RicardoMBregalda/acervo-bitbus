@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Visitante from '../views/visitante/Visitante.vue';
-import VisitanteForm from '../views/visitante/VisitanteForm.vue';
+import Participante from '../views/paticipante/Participante.vue';
+import ParticipanteForm from '../views/paticipante/ParticipanteForm.vue';
 import Acervo from '../views/acervo/Acervo.vue';
 import AcervoForm from '../views/acervo/AcervoForm.vue';
 import Visita from '../views/visita/Visita.vue';
@@ -13,14 +13,14 @@ const routes = [
     component: () => import('../views/Home.vue'),
   },
   {
-    path:'/visitante/index',
-    name:'Visitante',
-    component: Visitante,
+    path:'/participante/index',
+    name:'Participante',
+    component: Participante,
   },
   {
-    path:'/visitante/form',
-    name:'VisitanteForm',
-    component: VisitanteForm,
+    path:'/participante/form',
+    name:'ParticipanteForm',
+    component: ParticipanteForm,
   },
   {
     path:'/acervo/index',
