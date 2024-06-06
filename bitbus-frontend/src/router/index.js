@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path:'/participante/index',
-    name:'Participante',
+    name:'Participantes',
     component: Participante,
   },
   {
