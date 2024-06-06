@@ -93,32 +93,13 @@ const removerLink = (index) => {
                     placeholder="Local de Armazenamento" required />
             </div>
 
-            <div class="mb-5 ml-5 col-span-2 ">
-                <label for="comprimento"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Comprimento</label>
-                <input type="text" id="comprimento"
+            <div class="mb-5 ml-5 col-span-3 ">
+                <label for="dimensao"
+                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Dimensão</label>
+                <input type="text" id="dimensao"
                     class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
-                    placeholder="Comprimento" />
+                    placeholder="Dimensão" />
             </div>
-            <div class="mb-5 ml-5 col-span-2">
-                <label for="organizador"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Largura</label>
-                <input type="text" id="organizador"
-                    class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
-                    placeholder="Largura" />
-            </div>
-            <div class="mb-5 ml-5 col-span-2">
-                <label for="organizador"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Altura</label>
-                <input type="text" id="organizador"
-                    class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
-                    placeholder="Altura" />
-            </div>
-
-
-
-
-
 
             <h2 class="col-span-12 text-2xl text-teal-900 dark:text-white mb-5">Imagens</h2>
 
