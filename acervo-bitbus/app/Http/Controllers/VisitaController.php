@@ -7,7 +7,7 @@ use App\Models\Visita;
 use App\DTO\VisitaDTO;
 use App\Services\VisitaService;
 
-class UserController extends Controller
+class VisitaController extends Controller
 {
     private VisitaService $visitaService;
 
@@ -26,7 +26,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $visitaDTO = $this->createVisitaDTO($request);
-
+        
         $visita = $this->visitaService->create($visitaDTO);
 
         if (!$visita) {
@@ -75,9 +75,13 @@ class UserController extends Controller
     private function createVisitaDTO(Request $request): VisitaDTO 
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'password' => 'required|min:8|confirmed',
+            'organizador' => 'required|string|max:255',
+            'endereco' => 'required|string',
+            'cidade' => 'required|string|max:255',
+            'estado' => 'required|string|max:2',
+            'descricao' => 'nullable|string',
+            'data_inicio' => 'required|date|date_format:Y-m-d',
+            'data_fim' => 'nullable|date|date_format:Y-m-d',
         ]);
 
         $userDTO = VisitaDTO::fromValidatedData($validatedData);
