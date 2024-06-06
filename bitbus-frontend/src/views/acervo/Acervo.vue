@@ -1,37 +1,19 @@
 <script setup>
 import Sidebar from '../../components/Sidebar.vue';
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
 
-const acervos = [
-  {
-    id: 1,
-    codigo: "131131",
-    nome: "RTX",
-    tipo: "Placa de video",
-    ano: "Primeira acervo",
-    quantidade: "70",
-    imagem: ""
-  },
-  {
-    id: 1,
-    codigo: "7456",
-    nome: "SSD de 500 Gigas",
-    tipo: "HDs",
-    ano: "2003",
-    quantidade: "70",
-    imagem: ""
-  },
-  {
-    id: 1,
-    codigo: "2342",
-    nome: "RTX",
-    tipo: "Placa de video",
-    ano: "Primeira acervo",
-    quantidade: "70",
-    imagem: ""
-  },
+const acervos = ref({})
 
-
-]
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/produto');
+    acervos.value = response.data.data;
+    console.log(response);
+  } catch (error) {
+    console.error('Error fetching data', error);
+  }
+});
 
 </script>
 

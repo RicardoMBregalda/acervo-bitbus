@@ -13,12 +13,12 @@ class ProdutoController extends Controller
 
     public function __construct(ProdutoService $produtoService)
     {
-        $this->produtoService = $produtoService;
+        $this->ProdutoService = $produtoService;
     }
 
     public function index()
     {
-        $produtos = $this->produtoService->index();
+        $produtos = $this->ProdutoService->index();
 
         return response()->json(['data' => $produtos]);
     }
@@ -26,7 +26,7 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $produtoDTO = $this->createProdutoDTO($request);
-        $produto = $this->produtoService->create($produtoDTO);
+        $produto = $this->ProdutoService->create($produtoDTO);
 
         if (!$produto) {
             return response()->json(['message' => 'Produto not created, review your data!'], 500);
@@ -37,7 +37,7 @@ class ProdutoController extends Controller
 
     public function show(int $id)
     {
-        $produto = $this->produtoService->find($id);
+        $produto = $this->ProdutoService->find($id);
 
         if (!$produto) {
             return response()->json(['message' => 'Produto not found!'], 404);
@@ -50,7 +50,7 @@ class ProdutoController extends Controller
     {
         $produtoDTO = $this->createProdutoDTO($request);
 
-        $user = $this->produtoService->update($id, $produtoDTO);
+        $user = $this->ProdutoService->update($id, $produtoDTO);
 
         if (!$user) {
             return response()->json(['message' => 'Produto not updated, review your data!'], 404);
@@ -62,7 +62,7 @@ class ProdutoController extends Controller
 
     public function delete($id)
     {
-        $result = $this->produtoService->delete($id);
+        $result = $this->ProdutoService->delete($id);
 
         if (!$result) {
             return response()->json(['message' => 'Produto not found!'], 404);
@@ -82,7 +82,7 @@ class ProdutoController extends Controller
             'dimensoes' => 'nullable|string|max:100',
             'informacoes' => 'nullable|string',
             'link' => 'nullable|string',
-            'local_de_armazenamento' => 'nullable|max:100',
+            'local_de_armazenamento' => 'nullable|string|max:100',
         ]);
 
         $userDTO = ProdutoDTO::fromValidatedData($validatedData);
