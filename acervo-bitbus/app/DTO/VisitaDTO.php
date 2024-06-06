@@ -6,14 +6,23 @@ use App\Core\DTO\BaseDTO;
 
 class VisitaDTO extends BaseDTO
 {
-    public string $organizador;
-    public string $endereco;
-    public string $cidade;
-    public string $estado;
-    public string $descricao;
-    public string $data_inicio;
-    public string $data_fim;
+    public readonly string $organizador;
+    public readonly string $endereco;
+    public readonly string $cidade;
+    public readonly string $estado;
+    public readonly string $descricao;
+    public readonly string $data_inicio;
+    public readonly string $data_fim;
 
+    public function __construct(array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
+    
     public static function fromValidatedData(array $validatedData): self
     {
         return new self([
