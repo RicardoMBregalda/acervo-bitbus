@@ -4,6 +4,7 @@ import Sidebar from '../../components/Sidebar.vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const form = ref({
     codigo: "",
     nome: "",
@@ -19,8 +20,9 @@ const form = ref({
 async function handleSubmit(data) {
     try {
         const response = await axios.post('http://localhost:8000/api/produto', data);
-        console.log(response)
-        router.push({ name: 'Acervo' });
+        if (response) {
+            router.push({ name: 'Acervo' });
+        }
     } catch (error) {
         console.error('Houve um erro ao adicionar o participante:', error);
     }

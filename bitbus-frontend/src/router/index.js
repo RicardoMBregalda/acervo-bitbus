@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path:'/visita/index',
-    name:'Visita',
+    name:'Visitas',
     component: Visita,
   },
   {

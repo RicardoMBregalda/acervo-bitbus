@@ -29,8 +29,9 @@ watch(form.value, (newValue) => {
 async function handleSubmit(data) {
     try {
         const response = await axios.post('http://localhost:8000/api/participante', data);
-        console.log(response)
-        router.push({ name: 'Participantes' });
+        if (response) {
+            router.push({ name: 'Participantes' });
+        }
     } catch (error) {
         console.error('Houve um erro ao adicionar o participante:', error);
     }
