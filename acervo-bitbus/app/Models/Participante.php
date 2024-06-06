@@ -15,4 +15,9 @@ class Participante extends Model
         'documento',
         'email',
     ];
+
+    public function visitas()
+    {
+        return $this->belongsToMany(Visita::class, 'visita_produtos', 'produto_id', 'visita_id');
+    }
 }

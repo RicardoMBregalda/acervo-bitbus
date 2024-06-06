@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Visita;
 
 class Produto extends Model
 {
@@ -20,4 +21,9 @@ class Produto extends Model
         'link',
         'local_de_armazenamento',
     ];
+
+    public function visitas()
+    {
+        return $this->belongsToMany(Visita::class, 'visita_produtos', 'produto_id', 'visita_id');
+    }
 }
