@@ -12,7 +12,8 @@ class Visita extends Model
     protected $fillable = [
         'organizador',
         'endereco',
-        'complemento',
+        'cidade',
+        'estado',
         'descricao',
         'data_inicio',
         'data_fim',

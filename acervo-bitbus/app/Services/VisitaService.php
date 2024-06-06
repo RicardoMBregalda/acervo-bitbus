@@ -11,7 +11,8 @@ class VisitaService {
         $visita = new Visita();
         $visita->organizador = $data->organizador;
         $visita->endereco = $data->endereco;
-        $visita->complemento = $data->complemento;
+        $visita->cidade = $data->cidade;
+        $visita->estado = $data->estado;
         $visita->descricao = $data->descricao;
         $visita->data_inicio = $data->data_inicio;
         $visita->data_fim = $data->data_fim;
@@ -38,7 +39,7 @@ class VisitaService {
             return false;
         }
 
-        $visita->update($data);
+        $visita->update($data->toArray());
 
         return $visita;
     }

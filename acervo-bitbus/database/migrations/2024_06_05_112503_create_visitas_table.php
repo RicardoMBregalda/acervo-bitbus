@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('organizador');
             $table->text('endereco');
-            $table->string('complemento')->nullable();
-            $table->text('descricao');
+            $table->string('cidade');
+            $table->string('estado');
+            $table->text('descricao')->nullable();
             $table->date('data_inicio')->index();
             $table->date('data_fim')->nullable();
             $table->timestamps();
