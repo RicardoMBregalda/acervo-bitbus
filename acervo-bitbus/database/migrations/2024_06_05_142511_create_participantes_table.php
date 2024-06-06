@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('participantes', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('tipo');
             $table->string('documento');
             $table->string('email');
             $table->timestamps();
