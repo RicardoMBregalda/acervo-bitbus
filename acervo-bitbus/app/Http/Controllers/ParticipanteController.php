@@ -13,7 +13,7 @@ class ParticipanteController extends Controller
 
     public function __construct(ParticipanteService $participanteService)
     {
-        $this->ParticipanteService = $participanteService;
+        $this->participanteService = $participanteService;
     }
 
     public function index()

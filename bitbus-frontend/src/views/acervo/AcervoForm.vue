@@ -64,12 +64,9 @@ async function handleSubmit(data) {
 
             <div class="mb-5 col-span-12">
                 <label for="tipo" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Tipo</label>
-                <select id="tipo" v-model="form.tipo"
-                    class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500">
-                    <option value="">Selecione...</option>
-
-
-                </select>
+                <input type="text" id="tipo" v-model="form.tipo"
+                    class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                    placeholder="Tipo" required />
             </div>
 
             <div class="mb-5 col-span-12">

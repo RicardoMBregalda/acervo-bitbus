@@ -13,12 +13,12 @@ class ProdutoController extends Controller
 
     public function __construct(ProdutoService $produtoService)
     {
-        $this->ProdutoService = $produtoService;
+        $this->produtoService = $produtoService;
     }
 
     public function index()
     {
-        $produtos = $this->ProdutoService->index();
+        $produtos = $this->produtoService->index();
 
         return response()->json(['data' => $produtos]);
     }
@@ -26,7 +26,8 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $produtoDTO = $this->createProdutoDTO($request);
-        $produto = $this->ProdutoService->create($produtoDTO);
+
+        $produto = $this->produtoService->create($produtoDTO);
 
         if (!$produto) {
             return response()->json(['message' => 'Produto not created, review your data!'], 500);
@@ -37,7 +38,7 @@ class ProdutoController extends Controller
 
     public function show(int $id)
     {
-        $produto = $this->ProdutoService->find($id);
+        $produto = $this->produtoService->find($id);
 
         if (!$produto) {
             return response()->json(['message' => 'Produto not found!'], 404);
@@ -50,7 +51,7 @@ class ProdutoController extends Controller
     {
         $produtoDTO = $this->createProdutoDTO($request);
 
-        $user = $this->ProdutoService->update($id, $produtoDTO);
+        $user = $this->produtoService->update($id, $produtoDTO);
 
         if (!$user) {
             return response()->json(['message' => 'Produto not updated, review your data!'], 404);
@@ -62,7 +63,7 @@ class ProdutoController extends Controller
 
     public function delete($id)
     {
-        $result = $this->ProdutoService->delete($id);
+        $result = $this->produtoService->delete($id);
 
         if (!$result) {
             return response()->json(['message' => 'Produto not found!'], 404);
@@ -77,8 +78,8 @@ class ProdutoController extends Controller
             'codigo' => 'required|string|max:20',
             'nome' => 'required|string|max:100',
             'tipo' => 'required|string|max:40',
-            'ano' => 'nullable|integer|max:4',
-            'quantidade' => 'required|integer|max:11',
+            'ano' => 'nullable|integer',
+            'quantidade' => 'required|integer',
             'dimensoes' => 'nullable|string|max:100',
             'informacoes' => 'nullable|string',
             'link' => 'nullable|string',
