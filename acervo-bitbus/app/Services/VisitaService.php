@@ -2,9 +2,18 @@
 namespace App\Services;
 
 use App\DTO\VisitaDTO;
+use App\Models\Participante;
 use App\Models\Visita;
+use App\DTO\ParticipanteDTO;
 
 class VisitaService {
+
+    private ParticipanteService $participanteService;
+
+    public function __construct(ParticipanteService $participanteService)
+    {
+        $this->participanteService = $participanteService;
+    }
 
    public function create(VisitaDTO $data): Visita
     {
@@ -55,6 +64,26 @@ class VisitaService {
         $result = $visita->delete();
         
         return $result;
+    }
+
+    public function saveProdutosVisita(Visita $visita, array $produtosLista): void
+    {
+        foreach ($produtosLista as $produto) {
+            $visita->produtos()->attach($produto['id']);
+        }
+    } 
+
+    public function saveParticipantesVisita(Visita $visita, array $participantesLista): void
+    {
+        foreach ($participantesLista as $participante) {
+            if (!isset($participante['id'])) {
+                $participanteDTO = ParticipanteDTO::fromValidatedData($participante);
+                $part = $this->participanteService->create($participanteDTO);
+                $visita->participante()->attach($part->id);
+            } else {
+                $visita->participante()->attach($participante['id']);
+            }
+        }
     }
 
 }

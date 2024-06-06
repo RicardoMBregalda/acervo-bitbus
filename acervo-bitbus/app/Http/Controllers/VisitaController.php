@@ -26,6 +26,9 @@ class VisitaController extends Controller
     public function store(Request $request)
     {
         $visitaDTO = $this->createVisitaDTO($request);
+
+        $produtosLista = $request->input('produtos');
+        $participantesLista = $request->input('participantes');
         
         $visita = $this->visitaService->create($visitaDTO);
 
@@ -33,6 +36,14 @@ class VisitaController extends Controller
             return response()->json(['message' => 'Visita not created, review your data!'], 500);
         }
 
+        if (!empty($produtosLista)) {
+            $this->visitaService->saveProdutosVisita($visita, $produtosLista);
+        }
+
+        if (!empty($produtosLista)) {
+            $this->visitaService->saveParticipantesVisita($visita, $participantesLista);
+        }
+        
         return response()->json(['message' => 'Visita created successfully!', 'data' => $visita]);
     }
 
