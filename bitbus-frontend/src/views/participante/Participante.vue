@@ -9,7 +9,7 @@ const participantes = ref({})
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:8000/api/participante');
+    const response = await axios.get('http://127.0.0.1:8000/api/participante');
     participantes.value = response.data.data;
     console.log(response);
   } catch (error) {
@@ -20,7 +20,7 @@ onMounted(async () => {
 
 async function removerParticipante(id) {
   try {
-    const response = await axios.delete('http://localhost:8000/api/participante/' + id);
+    const response = await axios.delete('http://127.0.0.1:8000/api/participante/' + id);
     if (response) {
       console.error('Participante removido com sucesso');
       window.location.reload();

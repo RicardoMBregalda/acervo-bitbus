@@ -33,12 +33,12 @@ async function handleSubmit(data) {
     console.log("data", data)
     try {
         if (route.params.id) {
-            const response = await axios.put(`http://localhost:8000/api/participante/${route.params.id}`, data);
+            const response = await axios.put(`http://127.0.0.1:8000/api/participante/${route.params.id}`, data);
             if (response) {
                 router.push({ name: 'Participantes' });
             }
         } else {
-            const response = await axios.post('http://localhost:8000/api/participante', data);
+            const response = await axios.post('http://127.0.0.1:8000/api/participante', data);
             if (response) {
                 router.push({ name: 'Participantes' });
             }
@@ -49,7 +49,7 @@ async function handleSubmit(data) {
 }
 
 const fetchParticipate = async (id) => {
-    const response = await axios.get(`http://localhost:8000/api/participante/${id}`);
+    const response = await axios.get(`http://127.0.0.1:8000/api/participante/${id}`);
     form.value = response.data.data;
 
 };

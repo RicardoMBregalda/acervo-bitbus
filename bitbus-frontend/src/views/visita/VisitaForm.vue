@@ -39,7 +39,7 @@ const novoEmail = ref('');
 
 
 const fetchVisita = async (id) => {
-    const response = await axios.get(`http://localhost:8000/api/visita/${id}`);
+    const response = await axios.get(`http://127.0.0.1:8000/api/visita/${id}`);
     form.value = response.data.data;
     produtosLista.value = response.data.data.produtos;
     visitantesLista.value = response.data.data.participantes;
@@ -47,10 +47,10 @@ const fetchVisita = async (id) => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:8000/api/produto');
+    const response = await axios.get('http://127.0.0.1:8000/api/produto');
     produtos.value = response.data.data;
 
-    const secondResponse = await axios.get('http://localhost:8000/api/participante');
+    const secondResponse = await axios.get('http://127.0.0.1:8000/api/participante');
     visitantes.value = secondResponse.data.data;
 
     if (route.params.id) {
@@ -107,12 +107,12 @@ async function handleSubmit(data) {
     console.log("data",data)
     try {
         if (route.params.id) {
-            const response = await axios.put(`http://localhost:8000/api/visita/${route.params.id}`, data);
+            const response = await axios.put(`http://127.0.0.1:8000/api/visita/${route.params.id}`, data);
             if (response) {
                 router.push({ name: 'Visitas' });
             }
         } else {
-            const response = await axios.post('http://localhost:8000/api/visita', data);
+            const response = await axios.post('http://127.0.0.1:8000/api/visita', data);
             if (response) {
                 router.push({ name: 'Visitas' });
             }
@@ -341,18 +341,11 @@ async function handleSubmit(data) {
                 </table>
             </div>
             <!-- Campos para adicionar novo visitante -->
-            <div class="col-span-12">
-                <span class="text-white">
-                    Visitante Existente?
-                </span>
-                <label
-                    for="visitanteExistente"
-                    class="block mb-2 text-sm font-medium text-teal-900 dark:text-white"
-                >
-                    <input type="radio" v-model="visitanteExistente" :value="true" />
-                    Sim
-                    <input type="radio" v-model="visitanteExistente" :value="false" />
-                    Não
+            <div class="col-span-12 my-5">
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" value="" v-model="visitanteExistente" class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-teal-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 rounded-full peer dark:bg-teal-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-teal-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-teal-600 peer-checked:bg-teal-600"></div>
+                    <span class="ms-3 text-sm font-medium text-teal-900 dark:text-teal-300">Visitante Existente?</span>
                 </label>
             </div>
             <!-- Visitante existente -->

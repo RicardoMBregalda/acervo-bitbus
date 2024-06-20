@@ -9,7 +9,7 @@ const acervos = ref({})
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:8000/api/produto');
+    const response = await axios.get('http://127.0.0.1:8000/api/produto');
     acervos.value = response.data.data;
     console.log(response);
   } catch (error) {
@@ -19,7 +19,7 @@ onMounted(async () => {
 
 async function removerProduto(id) {
   try {
-    const response = await axios.delete('http://localhost:8000/api/produto/' + id);
+    const response = await axios.delete('http://127.0.0.1:8000/api/produto/' + id);
     if (response) {
       console.error('Produto removido com sucesso');
       window.location.reload();
@@ -120,7 +120,7 @@ const editarProduto = (id) => {
               </div>
             </td>
             <td class="p-4">
-              <img :src="acervo.imagem" class="w-16 md:w-32 max-w-full max-h-full" alt="">
+              <img :src="acervo.link" class="w-16 md:w-32 max-w-full max-h-full" alt="">
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ acervo.codigo }}

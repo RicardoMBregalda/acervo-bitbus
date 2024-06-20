@@ -9,7 +9,7 @@ const visitas = ref({})
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:8000/api/visita');
+    const response = await axios.get('http://127.0.0.1:8000/api/visita');
     visitas.value = response.data.data;
   } catch (error) {
     console.error('Error fetching data', error);
@@ -22,7 +22,7 @@ const editarVisita = (id) => {
 
 async function removerVisita(id) {
   try {
-    const response = await axios.delete('http://localhost:8000/api/visita/' + id);
+    const response = await axios.delete('http://127.0.0.1:8000/api/visita/' + id);
     if (response) {
       console.error('Participante removido com sucesso');
       window.location.reload();
@@ -90,9 +90,6 @@ async function removerVisita(id) {
               Cidade
             </th>
             <th scope="col" class="px-6 py-3">
-              Participantes
-            </th>
-            <th scope="col" class="px-6 py-3">
             </th>
             <th scope="col" class="px-6 py-3">
             </th>
@@ -116,9 +113,6 @@ async function removerVisita(id) {
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ visita.cidade }}
-            </td>
-            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ visita.numParticipantes }}
             </td>
             <td class="px-6 py-4">
               <div class="flex items">
