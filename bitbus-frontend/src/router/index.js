@@ -5,6 +5,8 @@ import Acervo from '../views/acervo/Acervo.vue';
 import AcervoForm from '../views/acervo/AcervoForm.vue';
 import Visita from '../views/visita/Visita.vue';
 import VisitaForm from '../views/visita/VisitaForm.vue';
+import Oficina from '../views/oficina/Oficina.vue';
+import OficinaForm from '../views/oficina/OficinaForm.vue';
 
 const routes = [
   {
@@ -58,6 +60,22 @@ const routes = [
     path:'/visita/form/:id',
     name:'VisitaFormEdit',
     component: VisitaForm,
+    props: true,
+  },
+  {
+    path:'/oficina/index',
+    name:'Oficinas',
+    component: Oficina,
+  },
+  {
+    path:'/oficina/form',
+    name:'OficinaForm',
+    component: OficinaForm,
+  },
+  {
+    path:'/oficina/form/:id',
+    name:'OficinaFormEdit',
+    component: OficinaForm,
     props: true,
   },
 ];

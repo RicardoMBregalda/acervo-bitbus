@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OficinaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VisitaController;
 use App\Http\Controllers\ParticipanteController;
@@ -26,3 +27,9 @@ Route::get('produto', [ProdutoController::class, 'index']);
 Route::get('produto/{id}', [ProdutoController::class, 'show']);
 Route::put('produto/{id}', [ProdutoController::class, 'update']);
 Route::delete('produto/{id}', [ProdutoController::class, 'delete']);
+
+Route::post('oficina', [OficinaController::class, 'store']);
+Route::get('oficina', [OficinaController::class, 'index']);
+Route::get('oficina/{id}', [OficinaController::class, 'show']);
+Route::put('oficina/{id}', [OficinaController::class, 'update']);
+Route::delete('oficina/{id}', [OficinaController::class, 'delete']);
