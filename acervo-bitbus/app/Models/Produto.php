@@ -26,4 +26,9 @@ class Produto extends Model
     {
         return $this->belongsToMany(Visita::class, 'visita_produtos', 'produto_id', 'visita_id');
     }
+
+    public function oficinas()
+    {
+        return $this->belongsToMany(Oficina::class, 'oficina_produtos', 'produto_id', 'oficina_id');
+    }
 }

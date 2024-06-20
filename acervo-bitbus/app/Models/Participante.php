@@ -18,6 +18,11 @@ class Participante extends Model
 
     public function visitas()
     {
-        return $this->belongsToMany(Visita::class, 'visita_produtos', 'produto_id', 'visita_id');
+        return $this->belongsToMany(Visita::class, 'visita_participantes', 'participante_id', 'visita_id');
+    }
+
+    public function oficinas()
+    {
+        return $this->belongsToMany(Oficina::class, 'oficina_participantes', 'participante_id', 'oficina_id');
     }
 }
