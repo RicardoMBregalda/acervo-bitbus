@@ -3,39 +3,36 @@ import Sidebar from '../../components/Sidebar.vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-const router = useRouter();
 
-const acervos = ref({})
+const router = useRouter();
+const oficinas = ref({})
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://127.0.0.1:8000/api/produto');
-    acervos.value = response.data.data;
-    console.log(response);
+    const response = await axios.get('http://127.0.0.1:8000/api/oficina');
+    oficinas.value = response.data.data;
   } catch (error) {
     console.error('Error fetching data', error);
   }
 });
 
-async function removerProduto(id) {
+const editarOficinaa = (id) => {
+  router.push({ name: 'OficinaFormEdit', params: { id } });
+}
+
+async function removerOficina(id) {
   try {
-    const response = await axios.delete('http://127.0.0.1:8000/api/produto/' + id);
+    const response = await axios.delete('http://127.0.0.1:8000/api/oficina/' + id);
     if (response) {
-      console.error('Produto removido com sucesso');
+      console.error('Oficina removida com sucesso');
       window.location.reload();
 
     }
   } catch (error) {
-    console.error('Houve um erro ao remover o produto:', error);
+    console.error('Houve um erro ao remover a oficina:', error);
   }
 
 };
-
-const editarProduto = (id) => {
-  router.push({ name: 'AcervoFormEdit', params: { id } });
-}
-
-
 
 </script>
 
@@ -46,7 +43,7 @@ const editarProduto = (id) => {
   <div class="flex flex-col top-3.5 sm:ml-64 relative overflow-x-auto pr-10">
 
     <div class="flex justify-end mx-4">
-      <router-link to="/acervo/form">
+      <router-link to="/oficina/form">
         <button type="button"
           class="px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 rounded-lg text-center dark:bg-teal-600 dark:hover:bg-teal-800 dark:focus:ring-teal-800">
           Cadastrar
@@ -74,6 +71,7 @@ const editarProduto = (id) => {
     <div class="m-4 rounded-lg overflow-hidden border border-teal-500">
       <table class="w-full text-sm text-left rtl:text-right text-teal-500 dark:text-teal-400">
         <thead class="text-xs text-teal-700 uppercase bg-teal-50 dark:bg-teal-700 dark:text-teal-50">
+
           <tr>
             <th scope="col" class="p-4">
               <div class="flex items-center">
@@ -83,34 +81,22 @@ const editarProduto = (id) => {
               </div>
             </th>
             <th scope="col" class="px-6 py-3">
-              imagem
+              Descricao
             </th>
             <th scope="col" class="px-6 py-3">
-              Codigo
+              Organizador
             </th>
             <th scope="col" class="px-6 py-3">
-              Descrição
+              Cidade
             </th>
             <th scope="col" class="px-6 py-3">
-              Tipo
             </th>
             <th scope="col" class="px-6 py-3">
-              Quantidade
             </th>
-            <th scope="col" class="px-6 py-3">
-              Ano
-            </th>
-
-            <th scope="col" class="px-6 py-3" style="width:3%">
-
-            </th>
-            <th scope="col" class="px-6 py-3" style="width:3%">
-            </th>
-
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(acervo) in acervos" :key="acervo.id"
+          <tr v-for="(oficina) in oficinas" :key="oficina.id"
             class="bg-white border-b dark:bg-teal-800 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-600">
             <td class="w-4 p-4">
               <div class="flex items-center">
@@ -119,29 +105,22 @@ const editarProduto = (id) => {
                 <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
               </div>
             </td>
-            <td class="p-4">
-              <img :src="acervo.link" class="h-20 max-w-full max-h-full" alt="">
+            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
+              {{ oficina.descricao }}
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ acervo.codigo }}
+              {{ oficina.organizador }}
             </td>
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ acervo.informacoes }}
+              {{ oficina.cidade }}
             </td>
-            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ acervo.tipo }}
-            </td>
-            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ acervo.quantidade }}
-            </td>
-            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              {{ acervo.ano }}
-            </td>
-            <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
-              <button type="button" @click="editarProduto(acervo.id)">Editar</button>
+            <td class="px-6 py-4">
+              <div class="flex items">
+                <button type="button" @click="editarOficina(oficina.id)">Editar</button>
+              </div>
             </td>
             <td class="px-6 py-4 font-medium text-teal-900 whitespace-nowrap dark:text-white">
-              <button @click="removerProduto(acervo.id)" class="focus:outline-none">
+              <button @click="removerOficina(oficina.id)" class="focus:outline-none">
                 <svg class="mx-auto w-[16px] h-[16px] text-red-600 hover:text-red-900" aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd"
