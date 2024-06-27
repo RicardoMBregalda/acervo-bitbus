@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VisitaController;
 use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\DoacaoController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -33,3 +34,9 @@ Route::get('oficina', [OficinaController::class, 'index']);
 Route::get('oficina/{id}', [OficinaController::class, 'show']);
 Route::put('oficina/{id}', [OficinaController::class, 'update']);
 Route::delete('oficina/{id}', [OficinaController::class, 'delete']);
+
+Route::post('doacao', [DoacaoController::class, 'store']);
+Route::get('doacao', [DoacaoController::class, 'index']);
+Route::get('doacao/{id}', [DoacaoController::class, 'show']);
+Route::put('doacao/{id}', [DoacaoController::class, 'update']);
+Route::delete('doacao/{id}', [DoacaoController::class, 'delete']);

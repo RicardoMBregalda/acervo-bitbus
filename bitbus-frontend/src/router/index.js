@@ -78,6 +78,22 @@ const routes = [
     component: OficinaForm,
     props: true,
   },
+  {
+    path:'/doacao/index',
+    name:'Oficinas',
+    component: Oficina,
+  },
+  {
+    path:'/doacao/form',
+    name:'OficinaForm',
+    component: DoacaoForm,
+  },
+  {
+    path:'/doacao/form/:id',
+    name:'DoacaoFormEdit',
+    component: DoacaoForm,
+    props: true,
+  },
 ];
 
 const router = createRouter({

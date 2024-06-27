@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('doacoes', function (Blueprint $table) {
+        Schema::create('doacao_produtos', function (Blueprint $table) {
             $table->id();
-            $table->integer('tipo_doacao');
-            $table->decimal('valor', 11, 2);
-            $table->text('detalhes');
-            $table->unsignedBigInteger('participante_id');
+            $table->foreignId('doacao_id')->constrained()->onDelete('cascade');
+            $table->foreignId('produto_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-            $table->foreign('participante_id')->references('id')->on('participantes')->onDelete('cascade');
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('doacoes');
+        Schema::dropIfExists('doacao_produtos');
     }
 };

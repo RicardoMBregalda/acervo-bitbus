@@ -25,4 +25,9 @@ class Participante extends Model
     {
         return $this->belongsToMany(Oficina::class, 'oficina_participantes', 'participante_id', 'oficina_id');
     }
+
+    public function doacoes()
+    {
+        return $this->hasMany(Doacao::class);
+    }
 }
