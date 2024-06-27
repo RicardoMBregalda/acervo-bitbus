@@ -7,6 +7,8 @@ import Visita from '../views/visita/Visita.vue';
 import VisitaForm from '../views/visita/VisitaForm.vue';
 import Oficina from '../views/oficina/Oficina.vue';
 import OficinaForm from '../views/oficina/OficinaForm.vue';
+import Doacao from '../views/doacao/Doacao.vue';
+import DoacaoForm from '../views/doacao/DoacaoForm.vue';
 
 const routes = [
   {
@@ -80,12 +82,12 @@ const routes = [
   },
   {
     path:'/doacao/index',
-    name:'Oficinas',
-    component: Oficina,
+    name:'Doacao',
+    component: Doacao,
   },
   {
     path:'/doacao/form',
-    name:'OficinaForm',
+    name:'DoacaoForm',
     component: DoacaoForm,
   },
   {
