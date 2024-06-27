@@ -7,6 +7,8 @@ const router = useRouter();
 
 const participantes = ref({})
 
+const buscar = ref('')
+
 onMounted(async () => {
   try {
     const response = await axios.get('http://127.0.0.1:8000/api/participante');
@@ -36,6 +38,17 @@ const editarParticipante = (id) => {
   router.push({ name: 'ParticipanteFormEdit', params: { id } });
 }
 
+const buscarParticipante = () => {
+  axios.get('http://127.0.0.1:8000/api/participante?nome=' + buscar.value)
+    .then(response => {
+      participantes.value = response.data.data;
+    })
+    .catch(error => {
+      console.error('Error fetching data', error);
+    });
+
+}
+
 </script>
 <template>
 
@@ -52,7 +65,7 @@ const editarParticipante = (id) => {
       </router-link>
     </div>
 
-    <div class="mx-4 flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between">
+    <div class="mx-4 flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-start">
       <label for="table-search" class="sr-only">Search</label>
       <div class="relative">
         <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
@@ -63,10 +76,11 @@ const editarParticipante = (id) => {
               clip-rule="evenodd"></path>
           </svg>
         </div>
-        <input type="text" id="table-search"
+        <input type="text" id="table-search" v-model="buscar" @keyup.enter="buscarParticipante"
           class="block p-2 ps-10 text-sm text-teal-900 border border-teal-300 rounded-lg w-80 bg-teal-50 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
           placeholder="Search for items">
       </div>
+      <button class="ml-5" @click="buscarParticipante">Buscar</button>
     </div>
     <div class="m-4 rounded-lg overflow-hidden border border-teal-500">
       <table class="w-full text-sm text-left rtl:text-right text-teal-500 dark:text-teal-400">

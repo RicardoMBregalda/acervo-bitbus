@@ -16,9 +16,17 @@ class ParticipanteController extends Controller
         $this->participanteService = $participanteService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $participantes = $this->participanteService->index();
+        $search = $request->input('nome');
+
+        $query = Participante::query();
+
+        if ($search) {
+            $query->where('nome', 'LIKE', "%{$search}%");
+        }
+
+        $participantes = $query->get();
 
         return response()->json(['data' => $participantes]);
     }
