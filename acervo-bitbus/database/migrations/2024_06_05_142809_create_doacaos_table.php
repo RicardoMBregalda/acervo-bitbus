@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('doacoes', function (Blueprint $table) {
+        Schema::create('doacaos', function (Blueprint $table) {
             $table->id();
             $table->integer('tipo_doacao');
             $table->decimal('valor', 11, 2);

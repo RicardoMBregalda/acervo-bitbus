@@ -9,13 +9,6 @@ use App\Models\Doacao;
 
 class DoacaoService {
 
-    private ParticipanteService $participanteService;
-
-    public function __construct(ParticipanteService $participanteService)
-    {
-        $this->participanteService = $participanteService;
-    }
-
    public function create(DoacaoDTO $data): Doacao
     {
         $doacao = new Doacao();
