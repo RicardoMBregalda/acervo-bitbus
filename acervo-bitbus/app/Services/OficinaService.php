@@ -66,10 +66,10 @@ class OficinaService {
         return $result;
     }
 
-    public function saveProdutosOficina(Oficina $oficina, array $produtosLista): void
+    public function saveProdutosOficina(Oficina $Oficina, array $produtosLista): void
     {
         foreach ($produtosLista as $produto) {
-            $oficina->produtos()->attach($produto['id']);
+            $Oficina->produtos()->attach($produto['id']);
         }
     } 
 
