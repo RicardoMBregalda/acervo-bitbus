@@ -104,17 +104,37 @@ const adicionarParticipante = () => {
 };
 
 const adicionarProduto = () => {
-    if (novoNome.value && novoTipo.value && novoDocumento.value) {
-        visitantesLista.value.push({
-            nome: novoNome.value,
-            tipo: novoTipo.value,
-            documento: novoDocumento.value,
-            email: novoEmail.value,
+    if (
+        novoDescricao.value 
+        && novoCodigo.value 
+        && novoAno.value
+        && novoTipoProduto.value
+        && novoInformacoes.value
+        && novoLinkImagem.value
+        && novoQuantidade.value
+        && novoLocalArmazenamento.value
+        && novoDimensao.value
+    ) {
+        produtosLista.value.push({
+            descricao: novoDescricao.value,
+            codigo: novoCodigo.value,
+            ano: novoAno.value,
+            tipo_produto: novoTipoProduto.value,
+            informacoes: novoInformacoes.value,
+            link: novoLinkImagem.value,
+            quantidade: novoQuantidade.value,
+            local_armazenamento: novoLocalArmazenamento.value,
+            dimensao: novoDimensao.value,
         });
-        novoNome.value = '';
-        novoTipo.value = '';
-        novoDocumento.value = '';
-        novoEmail.value = '';
+        novoDescricao.value = '';
+        novoCodigo.value = '';
+        novoAno.value = '';
+        novoTipoProduto.value = '';
+        novoInformacoes.value = '';
+        novoLinkImagem.value = '';
+        novoQuantidade.value = '';
+        novoLocalArmazenamento.value = '';
+        novoDimensao.value = '';
     } else {
         alert('Por favor, preencha todos os campos.');
     }
@@ -249,7 +269,7 @@ async function handleSubmit(data) {
                         </select>
                     </div>
                     <div class="ml-5 col-span-2">
-                        <button type="button" @click="adicionarProduto"
+                        <button type="button" @click="adicionarProdutoExistente"
                             class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                             Adicionar
                         </button>
@@ -328,6 +348,14 @@ async function handleSubmit(data) {
                         <input type="text" id="dimensao" v-model="novoDimensao"
                             class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
                             placeholder="Dimensão" />
+                    </div>
+                    <div class="col-span-2"></div>
+
+                    <div class="mb-5 ml-10 mt-7 col-span-2">
+                        <button type="button" @click="adicionarProduto"
+                            class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
+                            Adicionar
+                        </button>
                     </div>
 
                 </div>
