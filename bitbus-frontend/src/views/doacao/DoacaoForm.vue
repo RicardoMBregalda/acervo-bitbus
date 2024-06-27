@@ -235,62 +235,101 @@ async function handleSubmit(data) {
                 </div>
 
                 <!-- Produto Existente -->
-                <div class="col-span-10">
-                    <select 
-                        v-model="novoProduto"
-                        id="produto" 
-                        class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-                    >
-                        <option value="" selected disabled>Selecione um produto</option>
-                        <option v-for="produto in produtos" :key="produto.id" :value="produto">
-                            {{ produto.nome }}
-                        </option>
-                    </select>
-                </div>
-                <div class="ml-5 col-span-2">
-                    <button type="button" @click="adicionarProduto"
-                        class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
-                        Adicionar
-                    </button>
-                </div>
-
-                <!-- Produto novo -->
-                <div  class="col-span-12 grid grid-cols-12">
-                    <div class="mb-5 col-span-8">
-                        <label for="novoNome" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Nome</label>
-                        <input type="text" id="novoNome" v-model="novoNome"
-                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
-                            placeholder="Nome do Visitante" />
-                    </div>
-                    <div class="mb-5 ml-5 col-span-1">
-                        <label for="novoTipo" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Tipo</label>
-                        <select id="countries " v-model="novoTipo"
-                            class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500">
-                            >
-                            <option value="PF">PF</option>
-                            <option value="PJ">PJ</option>
+                <div v-if="produtoExistente" class="col-span-12 grid grid-cols-12">
+                    <div class="col-span-10">
+                        <select 
+                            v-model="novoProduto"
+                            id="produto" 
+                            class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                        >
+                            <option value="" selected disabled>Selecione um produto</option>
+                            <option v-for="produto in produtos" :key="produto.id" :value="produto">
+                                {{ produto.nome }}
+                            </option>
                         </select>
                     </div>
-                    <div class="mb-5 ml-5 col-span-3">
-                        <label for="novoDocumento"
-                            class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">CPF/CPNJ</label>
-                        <input id="novoDocumento" v-model="novoDocumento"
-                            class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block  w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-                            placeholder="CPF/CNPJ" />
-                    </div>
-                    <div class="mb-5 col-span-10">
-                        <label for="novoEmail"
-                            class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">E-mail</label>
-                        <input id="novoEmail" v-model="novoEmail"
-                            class="bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block  w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-                            placeholder="nome@email.com" />
-                    </div>
-                    <div class="mb-5 ml-5 mt-7 col-span-2">
-                        <button type="button" @click="adicionarVisitante"
+                    <div class="ml-5 col-span-2">
+                        <button type="button" @click="adicionarProduto"
                             class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                             Adicionar
                         </button>
                     </div>
+                </div>
+
+                <!-- Produto novo -->
+                <div v-else class="col-span-12 grid grid-cols-12">
+                    <div class="mb-5  col-span-8">
+                        <label for="nome" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Descrição</label>
+                        <input type="text" id="nome" v-model="novoNome"
+                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                            placeholder="Descrição do Produto" required />
+                    </div>
+
+                    <div class="mb-5  ml-5 col-span-3">
+                        <label for="codigo" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Código</label>
+                        <input type="text" id="codigo" v-model="novoCodigo"
+                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                            placeholder="Código" required />
+                    </div>
+
+                    <div class="mb-5 ml-5 col-span-">
+                        <label for="ano" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Ano</label>
+                        <input type="number" id="ano" v-model="novoAno"
+                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                            placeholder="Ano" required />
+                    </div>
+
+
+                    <div class="mb-5 col-span-12">
+                        <label for="tipo" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Tipo</label>
+                        <input type="text" id="tipo" v-model="novoTipo"
+                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                            placeholder="Tipo" required />
+                    </div>
+
+                    <div class="mb-5 col-span-12">
+                        <label for="informacoes"
+                            class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Informações</label>
+                        <textarea id="informacoes" rows="4" v-model="novoInformacoes"
+                            class="block p-2.5 w-full text-sm text-teal-900 bg-teal-50 rounded-lg border border-teal-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                            placeholder="Descreva o produto..."></textarea>
+
+                    </div>
+                    <div class="mb-5 col-span-12 ">
+                        <label for="link" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Link da
+                            Imagem</label>
+                        <input type="text" id="link" v-model="novoLinkImagem"
+                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                            placeholder="Link da Imagem" />
+                    </div>
+
+
+                    <h2 class="col-span-12 text-2xl text-teal-900 dark:text-white mb-5">Estoque e Dimensões</h2>
+
+                    <div class="mb-5 col-span-2">
+                        <label for="quantidade"
+                            class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Quantidade</label>
+                        <input type="number" id="quantidade" v-model="novoQuantidade"
+                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                            placeholder="Quantidade" required />
+                    </div>
+
+                    <div class="mb-5 ml-5 col-span-3">
+                        <label for="lical" class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Local de
+                            Armazenamento</label>
+                        <input type="local" id="local" v-model="novoLocalArmazenamento"
+                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                            placeholder="Local de Armazenamento" required />
+                    </div>
+
+                    <div class="mb-5 ml-5 col-span-3 ">
+                        <label for="dimensao"
+                            class="block mb-2 text-sm font-medium text-teal-900 dark:text-white">Dimensão</label>
+                        <input type="text" id="dimensao" v-model="novoDimensao"
+                            class="shadow-sm bg-teal-50 border border-teal-300 text-teal-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 dark:shadow-sm-light"
+                            placeholder="Dimensão" />
+                    </div>
+
                 </div>
             </div>
 
