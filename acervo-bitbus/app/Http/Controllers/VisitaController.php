@@ -16,10 +16,18 @@ class VisitaController extends Controller
         $this->visitaService = $visitaService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $visitas = $this->visitaService->index();
-        
+        $search = $request->input('id');
+
+        $query = Visita::query();
+
+        if ($search) {
+            $query->where('id', 'LIKE', "%{$search}%");
+        }
+
+        $visitas = $query->get();
+
         return response()->json(['data' => $visitas]);
     }
 
