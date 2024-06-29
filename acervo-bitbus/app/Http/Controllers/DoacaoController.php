@@ -16,11 +16,19 @@ class DoacaoController extends Controller
         $this->doacaoService = $doacaoService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $visitas = $this->doacaoService->index();
-        
-        return response()->json(['data' => $visitas]);
+        $search = $request->input('id');
+
+        $query = Doacao::query();
+
+        if ($search) {
+            $query->where('id', 'LIKE', "%{$search}%");
+        }
+
+        $doacoes = $query->get();
+
+        return response()->json(['data' => $doacoes]);
     }
 
     public function store(Request $request)
