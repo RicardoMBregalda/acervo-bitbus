@@ -16,10 +16,18 @@ class OficinaController extends Controller
         $this->oficinaService = $oficinaService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $oficinas = $this->oficinaService->index();
-        
+        $search = $request->input('id');
+
+        $query = Oficina::query();
+
+        if ($search) {
+            $query->where('id', 'LIKE', "%{$search}%");
+        }
+
+        $oficinas = $query->get();
+
         return response()->json(['data' => $oficinas]);
     }
 
