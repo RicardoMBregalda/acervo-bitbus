@@ -16,9 +16,17 @@ class ProdutoController extends Controller
         $this->produtoService = $produtoService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = $this->produtoService->index();
+        $search = $request->input('nome');
+
+        $query = Produto::query();
+
+        if ($search) {
+            $query->where('nome', 'LIKE', "%{$search}%");
+        }
+
+        $produtos = $query->get();
 
         return response()->json(['data' => $produtos]);
     }
