@@ -65,10 +65,10 @@ const buscarParticipante = () => {
       </router-link>
     </div>
 
-    <div class="mx-4 flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-start">
-      <label for="table-search" class="sr-only">Search</label>
+    <div class="mx-4 flex space-y-4 sm:space-y-0 justify-start">
+      <label for="table-search" class="mb-2 text-sm font-medium text-teal-900 sr-only dark:text-white">Search</label>
       <div class="relative">
-        <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg class="w-5 h-5 text-teal-500 dark:text-teal-400" aria-hidden="true" fill="currentColor"
             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
@@ -77,22 +77,18 @@ const buscarParticipante = () => {
           </svg>
         </div>
         <input type="text" id="table-search" v-model="buscar" @keyup.enter="buscarParticipante"
-          class="block p-2 ps-10 text-sm text-teal-900 border border-teal-300 rounded-lg w-80 bg-teal-50 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-          placeholder="Search for items">
+          class="mr-20 block w-full p-4 ps-10 text-sm text-teal-900 border border-teal-300 rounded-lg bg-teal-50 focus:ring-teal-500 focus:border-teal-500 dark:bg-teal-700 dark:border-teal-600 dark:placeholder-teal-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+          placeholder="Busque pelo nome">
+          <button
+          class="text-white absolute end-2.5 bottom-2.5 bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
+          @click="buscarParticipante">Buscar</button>
       </div>
-      <button class="ml-5" @click="buscarParticipante">Buscar</button>
     </div>
     <div class="m-4 rounded-lg overflow-hidden border border-teal-500">
       <table class="w-full text-sm text-left rtl:text-right text-teal-500 dark:text-teal-400">
         <thead class="text-xs text-teal-700 uppercase bg-teal-50 dark:bg-teal-700 dark:text-teal-50">
           <tr>
-            <th scope="col" class="p-4">
-              <div class="flex items-center">
-                <input id="checkbox-all-search" type="checkbox"
-                  class="w-4 h-4 text-teal-600 bg-teal-100 border-teal-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-teal-800 dark:focus:ring-offset-teal-800 focus:ring-2 dark:bg-teal-700 dark:border-teal-600">
-                <label for="checkbox-all-search" class="sr-only">checkbox</label>
-              </div>
-            </th>
+            
             <th scope="col" class="px-6 py-3">
               Nome
             </th>
@@ -115,14 +111,7 @@ const buscarParticipante = () => {
         </thead>
         <tbody>
           <tr v-for="(participante) in participantes" :key="participante.id"
-            class="bg-white border-b dark:bg-teal-800 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-600">
-            <td class="w-4 p-4">
-              <div class="flex items-center">
-                <input id="checkbox-table-search-1" type="checkbox"
-                  class="w-4 h-4 text-teal-600 bg-teal-100 border-teal-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-teal-800 dark:focus:ring-offset-teal-800 focus:ring-2 dark:bg-teal-700 dark:border-teal-600">
-                <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-              </div>
-            </td>
+            class="bg-white border-b dark:bg-teal-800 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-600">  
             <td class="px-6 py-4 font-semibold text-teal-900 dark:text-white">
               {{ participante.nome }}
             </td>
