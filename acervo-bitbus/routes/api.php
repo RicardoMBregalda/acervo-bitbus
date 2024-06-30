@@ -6,6 +6,8 @@ use App\Http\Controllers\VisitaController;
 use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\DoacaoController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FormController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -40,3 +42,10 @@ Route::get('doacao', [DoacaoController::class, 'index']);
 Route::get('doacao/{id}', [DoacaoController::class, 'show']);
 Route::put('doacao/{id}', [DoacaoController::class, 'update']);
 Route::delete('doacao/{id}', [DoacaoController::class, 'delete']);
+
+Route::post('feedback', [FeedbackController::class, 'store']);
+Route::get('feedback', [FeedbackController::class, '    ']);
+Route::get('feedback/{id}', [FeedbackController::class, 'show']);
+Route::put('feedback/{id}', [FeedbackController::class, 'update']);
+Route::delete('feedback/{id}', [FeedbackController::class, 'delete']);
+

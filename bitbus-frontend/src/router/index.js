@@ -9,6 +9,8 @@ import Oficina from '../views/oficina/Oficina.vue';
 import OficinaForm from '../views/oficina/OficinaForm.vue';
 import Doacao from '../views/doacao/Doacao.vue';
 import DoacaoForm from '../views/doacao/DoacaoForm.vue';
+import Feedback from '../views/feedback/Feedback.vue';
+import FeedbackForm from '../views/feedback/FeedbackForm.vue';
 
 const routes = [
   {
@@ -95,6 +97,16 @@ const routes = [
     name:'DoacaoFormEdit',
     component: DoacaoForm,
     props: true,
+  },
+  {
+    path:'/feedback/index',
+    name:'Feedback',
+    component: Feedback,
+  },
+  {
+    path:'/feedback/form',
+    name:'FeedbackForm',
+    component: FeedbackForm,
   },
 ];
 
