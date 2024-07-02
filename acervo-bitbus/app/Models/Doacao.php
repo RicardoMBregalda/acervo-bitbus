@@ -16,6 +16,9 @@ class Doacao extends Model
         'participante_id', 
     ];
 
+    const TIPO_DOACAO_DINHEIRO = 1;
+    const TIPO_DOACAO_PRODUTO = 2;
+
     public function produtos()
     {
         return $this->belongsToMany(Produto::class, 'doacao_produtos', 'doacao_id', 'produto_id');

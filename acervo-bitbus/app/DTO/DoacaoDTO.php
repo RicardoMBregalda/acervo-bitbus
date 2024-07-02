@@ -9,7 +9,7 @@ class DoacaoDTO extends BaseDTO
     public readonly int $tipo_doacao;
     public readonly float $valor;
     public readonly string $detalhes;
-    public readonly int $participante_id;
+    public int $participante_id;
 
     public function __construct(array $data)
     {

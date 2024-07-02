@@ -36,7 +36,13 @@ class DoacaoController extends Controller
         $doacaoDTO = $this->createDoacaoDTO($request);
 
         $produtosLista = $request->input('produtos');
+        $participante = $request->input('participante');
         
+        if ($doacaoDTO->participante_id == 0) {
+            $novoParticipante = $this->doacaoService->saveParticipanteDoacao($doacaoDTO->participante_id, $participante);
+            $doacaoDTO->participante_id = $novoParticipante->id; 
+        }
+
         $doacao = $this->doacaoService->create($doacaoDTO);
 
         if (!$doacao) {
@@ -47,7 +53,7 @@ class DoacaoController extends Controller
             $this->doacaoService->saveProdutosDoacao($doacao, $produtosLista);
         }
 
-        return response()->json(['message' => 'Visita created successfully!', 'data' => $doacao]);
+        return response()->json(['message' => 'Doacao created successfully!', 'data' => $doacao]);
     }
 
     public function show(int $id)
@@ -95,10 +101,10 @@ class DoacaoController extends Controller
     private function createDoacaoDTO(Request $request): DoacaoDTO 
     {
         $validatedData = $request->validate([
-            'tipo_doacao' => 'required|string',
-            'valor' => 'required|numeric',
-            'detalhes' => 'required|string',
-            'participante_id' => 'required|integer'
+            'tipo_doacao' => 'required|integer',
+            'valor' => 'numeric',
+            'detalhes' => 'nullable|string',
+            'participante_id' => 'integer'
         ]);
 
         $doacaoDTO = DoacaoDTO::fromValidatedData($validatedData);

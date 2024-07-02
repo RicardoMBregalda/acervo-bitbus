@@ -5,14 +5,24 @@ use App\DTO\DoacaoDTO;
 use App\Models\Participante;
 use App\Models\Visita;
 use App\DTO\ParticipanteDTO;
+use App\DTO\ProdutoDTO;
 use App\Models\Doacao;
 
 class DoacaoService {
 
-   public function create(DoacaoDTO $data): Doacao
+    private ParticipanteService $participanteService;
+    private ProdutoService $produtoService;
+
+    public function __construct(ParticipanteService $participanteService, ProdutoService $produtoService)
+    {
+        $this->participanteService = $participanteService;
+        $this->produtoService = $produtoService;
+    }
+
+    public function create(DoacaoDTO $data): Doacao
     {
         $doacao = new Doacao();
-        $doacao->tipo_doacoa = $data->tipo_doacao;
+        $doacao->tipo_doacao = $data->tipo_doacao;
         $doacao->valor = $data->valor;
         $doacao->detalhes = $data->detalhes;
         $doacao->participante_id = $data->participante_id;
@@ -60,7 +70,13 @@ class DoacaoService {
     public function saveProdutosDoacao(Doacao $doacao, array $produtosLista): void
     {
         foreach ($produtosLista as $produto) {
-            $doacao->produtos()->attach($produto['id']);
+            if (!isset($produto['id'])) {
+                $produtoDTO = ProdutoDTO::fromValidatedData($produto);
+                $prod = $this->produtoService->create($produtoDTO);
+                $doacao->produtos()->attach($prod->id);
+            } else {
+                $doacao->produtos()->attach($produto['id']);
+            }
         }
     } 
 
@@ -68,6 +84,15 @@ class DoacaoService {
     {
         $doacao->produtos()->detach();
         $this->saveProdutosDoacao($doacao, $produtosLista);
+    }
+
+    public function saveParticipanteDoacao(int $participante_id, array $participante): Participante
+    {
+        if ($participante_id == 0) {
+            $participanteDTO = ParticipanteDTO::fromValidatedData($participante[0]);
+            $part = $this->participanteService->create($participanteDTO);
+            return $part;
+        } 
     }
 
 }

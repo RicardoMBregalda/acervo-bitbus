@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('doacaos', function (Blueprint $table) {
             $table->id();
             $table->integer('tipo_doacao');
-            $table->decimal('valor', 11, 2);
-            $table->text('detalhes');
+            $table->decimal('valor', 11, 2)->default(0.00);
+            $table->text('detalhes')->nullable();
             $table->unsignedBigInteger('participante_id');
             $table->timestamps();
             $table->foreign('participante_id')->references('id')->on('participantes')->onDelete('cascade');

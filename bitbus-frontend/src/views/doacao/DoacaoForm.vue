@@ -17,6 +17,9 @@ const participantesLista = ref([]);
 
 const form = ref({
     tipo_doacao: '',
+    participante_id: '',
+    valor: 0.0,
+    detalhes: '',
     produtos: [],
     participantes: [],
 });
@@ -31,7 +34,7 @@ const produtos = ref({})
 const participantes = ref({})
 
 // Produto
-const novoDescricao = ref('');
+const novoNomeProduto = ref('');
 const novoCodigo = ref('');
 const novoAno = ref('');
 const novoTipoProduto = ref('');
@@ -52,7 +55,7 @@ const fetchDoacao = async (id) => {
     const response = await axios.get(`http://127.0.0.1:8000/api/doacao/${id}`);
     form.value = response.data.data;
     produtosLista.value = response.data.data.produtos;
-    participantesLista.value = response.data.data.participantes;
+    participantesLista.value = response.data.data.participante;
 };
 
 onMounted(async () => {
@@ -82,6 +85,7 @@ const adicionarProdutoExistente = () => {
 const adicionarParticipanteExistente = () => {
     if (novoParticipante) {
         participantesLista.value.push(novoParticipante.value);
+        form.value.participante_id = novoParticipante.value.id;
         novoParticipante.value = {};
     }
 };
@@ -94,6 +98,7 @@ const adicionarParticipante = () => {
             documento: novoDocumento.value,
             email: novoEmail.value,
         });
+        form.value.participante_id = 0;
         novoNome.value = '';
         novoTipo.value = '';
         novoDocumento.value = '';
@@ -105,7 +110,7 @@ const adicionarParticipante = () => {
 
 const adicionarProduto = () => {
     if (
-        novoDescricao.value
+        novoNomeProduto .value
         && novoCodigo.value
         && novoAno.value
         && novoTipoProduto.value
@@ -116,17 +121,17 @@ const adicionarProduto = () => {
         && novoDimensao.value
     ) {
         produtosLista.value.push({
-            descricao: novoDescricao.value,
+            nome: novoNomeProduto.value,
             codigo: novoCodigo.value,
             ano: novoAno.value,
-            tipo_produto: novoTipoProduto.value,
+            tipo: novoTipoProduto.value,
             informacoes: novoInformacoes.value,
             link: novoLinkImagem.value,
             quantidade: novoQuantidade.value,
-            local_armazenamento: novoLocalArmazenamento.value,
+            local_de_armazenamento: novoLocalArmazenamento.value,
             dimensao: novoDimensao.value,
         });
-        novoDescricao.value = '';
+        novoNomeProduto.value = '';
         novoCodigo.value = '';
         novoAno.value = '';
         novoTipoProduto.value = '';
@@ -150,7 +155,9 @@ const removerParticipante = (index) => {
 
 async function handleSubmit(data) {
     data.produtos = produtosLista.value;
-    data.participantes = participantesLista.value;
+    data.participante = participantesLista.value;
+    data.tipo_doacao = data.tipo_doacao === 'produto' ? TIPO_PRODUTO : TIPO_DINHEIRO;
+    data.valor = data.valor ? data.valor : 0.0;
     console.log("data", data)
     try {
         if (route.params.id) {
@@ -383,8 +390,8 @@ async function handleSubmit(data) {
                 <div v-else class="col-span-12 grid grid-cols-12">
                     <div class="mb-5  col-span-8">
                         <label for="nome"
-                            class="block mb-2 text-sm font-medium text-green-900 dark:text-white">Descrição</label>
-                        <input type="text" id="nome" v-model="novoNome"
+                            class="block mb-2 text-sm font-medium text-green-900 dark:text-white">Nome</label>
+                        <input type="text" id="nome" v-model="novoNomeProduto"
                             class="shadow-sm bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
                             placeholder="Descrição do Produto" required />
                     </div>
@@ -409,7 +416,7 @@ async function handleSubmit(data) {
                     <div class="mb-5 col-span-12">
                         <label for="tipo"
                             class="block mb-2 text-sm font-medium text-green-900 dark:text-white">Tipo</label>
-                        <input type="text" id="tipo" v-model="novoTipo"
+                        <input type="text" id="tipo" v-model="novoTipoProduto"
                             class="shadow-sm bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
                             placeholder="Tipo" required />
                     </div>
@@ -478,7 +485,7 @@ async function handleSubmit(data) {
 
             <h2 class="col-span-12 text-2xl text-green-900 dark:text-white my-5">Descriçao da Doação</h2>
             <div class="mb-5 col-span-12">
-                <textarea v-model="form.descricao" id="descricao" rows="4"
+                <textarea v-model="form.detalhes" id="detalhes" rows="4"
                     class="block p-2.5 w-full text-sm text-green-900 bg-green-50 rounded-lg border border-green-300 focus:ring-green-500 focus:border-green-500 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                     placeholder="Descreva a visita...">
                 </textarea>
