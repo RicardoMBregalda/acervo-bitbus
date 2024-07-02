@@ -48,7 +48,7 @@ class VisitaController extends Controller
             $this->visitaService->saveProdutosVisita($visita, $produtosLista);
         }
 
-        if (!empty($produtosLista)) {
+        if (!empty($participantesLista)) {
             $this->visitaService->saveParticipantesVisita($visita, $participantesLista);
         }
 
