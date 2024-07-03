@@ -115,6 +115,10 @@ onMounted(async () => {
                     class="shadow-sm bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
                     placeholder="Link da Imagem" />
             </div>
+            <div v-if="form.link" class="flex justify-center mb-5 col-span-12 ">
+
+                <img :src=form.link class="max-h-[500px] max-w-full" alt="imagem do produto ">
+            </div>
 
 
             <h2 class="col-span-12 text-2xl text-green-900 dark:text-white mb-5">Estoque e Dimensões</h2>
