@@ -18,7 +18,7 @@ onMounted(async () => {
   }
 });
 
-const editarOficinaa = (id) => {
+const editarOficina = (id) => {
   router.push({ name: 'OficinaFormEdit', params: { id } });
 }
 
