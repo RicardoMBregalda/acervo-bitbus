@@ -55,7 +55,7 @@ const fetchDoacao = async (id) => {
     const response = await axios.get(`http://127.0.0.1:8000/api/doacao/${id}`);
     form.value = response.data.data;
     produtosLista.value = response.data.data.produtos;
-    participantesLista.value = response.data.data.participante;
+    participantesLista.value = [response.data.data.participante];
 };
 
 onMounted(async () => {
@@ -129,7 +129,7 @@ const adicionarProduto = () => {
             link: novoLinkImagem.value,
             quantidade: novoQuantidade.value,
             local_de_armazenamento: novoLocalArmazenamento.value,
-            dimensao: novoDimensao.value,
+            dimensoes: novoDimensao.value,
         });
         novoNomeProduto.value = '';
         novoCodigo.value = '';
@@ -158,7 +158,6 @@ async function handleSubmit(data) {
     data.participante = participantesLista.value;
     data.tipo_doacao = data.tipo_doacao === 'produto' ? TIPO_PRODUTO : TIPO_DINHEIRO;
     data.valor = data.valor ? data.valor : 0.0;
-    console.log("data", data)
     try {
         if (route.params.id) {
             const response = await axios.put(`http://127.0.0.1:8000/api/doacao/${route.params.id}`, data);
@@ -175,6 +174,7 @@ async function handleSubmit(data) {
         console.error('Houve um erro ao adicionar a doação:', error);
     }
 }
+
 </script>
 
 <template>
@@ -231,87 +231,89 @@ async function handleSubmit(data) {
                     </tbody>
                 </table>
             </div>
-            <!-- Campos para adicionar novo participante -->
-            <div class="col-span-12 my-5">
-                <label class="inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" v-model="participanteExistente" class="sr-only peer">
-                    <div
-                        class="relative w-11 h-6 bg-green-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 rounded-full peer dark:bg-green-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-green-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-green-600 peer-checked:bg-green-600">
+            <div v-if="participantesLista.length === 0" class="col-span-12 grid grid-cols-12">
+                <!-- Campos para adicionar novo participante -->
+                <div class="col-span-12 my-5">
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" v-model="participanteExistente" class="sr-only peer">
+                        <div
+                            class="relative w-11 h-6 bg-green-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 rounded-full peer dark:bg-green-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-green-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-green-600 peer-checked:bg-green-600">
+                        </div>
+                        <span class="ms-3 text-sm font-medium text-green-900 dark:text-green-300">Participante
+                            Existente?</span>
+                    </label>
+                </div>
+                <!-- Participante existente -->
+                <div v-if="participanteExistente" class="col-span-12 grid grid-cols-12">
+                    <div class="col-span-10">
+                        <select v-model="novoParticipante" id="produto"
+                            class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                            <option value="" selected disabled>Selecione um participante</option>
+                            <option v-for="participante in participantes" :key="participante.id" :value="participante">
+                                {{ participante.nome }}
+                            </option>
+                        </select>
                     </div>
-                    <span class="ms-3 text-sm font-medium text-green-900 dark:text-green-300">Participante
-                        Existente?</span>
-                </label>
-            </div>
-            <!-- Participante existente -->
-            <div v-if="participanteExistente" class="col-span-12 grid grid-cols-12">
-                <div class="col-span-10">
-                    <select v-model="novoParticipante" id="produto"
-                        class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-                        <option value="" selected disabled>Selecione um participante</option>
-                        <option v-for="participante in participantes" :key="participante.id" :value="participante">
-                            {{ participante.nome }}
-                        </option>
-                    </select>
+                    <div class="ml-5 col-span-2">
+                        <button type="button" @click="adicionarParticipanteExistente"
+                            class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">
+                            Adicionar
+                        </button>
+                    </div>
                 </div>
-                <div class="ml-5 col-span-2">
-                    <button type="button" @click="adicionarParticipanteExistente"
-                        class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">
-                        Adicionar
-                    </button>
-                </div>
-            </div>
 
-            <!-- Participante novo -->
-            <div v-else class="col-span-12 grid grid-cols-12">
-                <div class="mb-5 col-span-8">
-                    <label for="novoNome"
-                        class="block mb-2 text-sm font-medium text-green-900 dark:text-white">Nome</label>
-                    <input type="text" id="novoNome" v-model="novoNome"
-                        class="shadow-sm bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
-                        placeholder="Nome do Visitante" />
-                </div>
-                <div class="mb-5 ml-5 col-span-1">
-                    <label for="novoTipo"
-                        class="block mb-2 text-sm font-medium text-green-900 dark:text-white">Tipo</label>
-                    <select id="countries " v-model="novoTipo"
-                        class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-                        >
-                        <option value="PF">PF</option>
-                        <option value="PJ">PJ</option>
-                    </select>
-                </div>
-                <div class="mb-5 ml-5 col-span-3">
-                    <label for="novoDocumento"
-                        class="block mb-2 text-sm font-medium text-green-900 dark:text-white">CPF/CPNJ</label>
-                    <input id="novoDocumento" v-model="novoDocumento"
-                        class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block  w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                        placeholder="CPF/CNPJ" />
-                </div>
-                <div class="mb-5 col-span-10">
-                    <label for="novoEmail"
-                        class="block mb-2 text-sm font-medium text-green-900 dark:text-white">E-mail</label>
-                    <input id="novoEmail" v-model="novoEmail"
-                        class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block  w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                        placeholder="nome@email.com" />
-                </div>
-                <div class="mb-5 ml-5 mt-7 col-span-2">
-                    <button type="button" @click="adicionarParticipante"
-                        class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">
-                        Adicionar
-                    </button>
+                <!-- Participante novo -->
+                <div v-else class="col-span-12 grid grid-cols-12">
+                    <div class="mb-5 col-span-8">
+                        <label for="novoNome"
+                            class="block mb-2 text-sm font-medium text-green-900 dark:text-white">Nome</label>
+                        <input type="text" id="novoNome" v-model="novoNome"
+                            class="shadow-sm bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
+                            placeholder="Nome do Visitante" />
+                    </div>
+                    <div class="mb-5 ml-5 col-span-1">
+                        <label for="novoTipo"
+                            class="block mb-2 text-sm font-medium text-green-900 dark:text-white">Tipo</label>
+                        <select id="countries " v-model="novoTipo"
+                            class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                            >
+                            <option value="PF">PF</option>
+                            <option value="PJ">PJ</option>
+                        </select>
+                    </div>
+                    <div class="mb-5 ml-5 col-span-3">
+                        <label for="novoDocumento"
+                            class="block mb-2 text-sm font-medium text-green-900 dark:text-white">CPF/CPNJ</label>
+                        <input id="novoDocumento" v-model="novoDocumento"
+                            class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block  w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            placeholder="CPF/CNPJ" />
+                    </div>
+                    <div class="mb-5 col-span-10">
+                        <label for="novoEmail"
+                            class="block mb-2 text-sm font-medium text-green-900 dark:text-white">E-mail</label>
+                        <input id="novoEmail" v-model="novoEmail"
+                            class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block  w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            placeholder="nome@email.com" />
+                    </div>
+                    <div class="mb-5 ml-5 mt-7 col-span-2">
+                        <button type="button" @click="adicionarParticipante"
+                            class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">
+                            Adicionar
+                        </button>
+                    </div>
                 </div>
             </div>
-
+            
             <div class="mb-5 col-span-12">
                 <select id="tipo_doacao" v-model="form.tipo_doacao"
                     class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                     <option value="" selected disabled>Selecione o tipo de doação</option>
-                    <option value="dinheiro">Dinheiro</option>
-                    <option value="produto">Produto</option>
+                    <option value="1">Dinheiro</option>
+                    <option value="2">Produto</option>
                 </select>
             </div>
 
-            <div v-if="form.tipo_doacao === 'produto'" class="col-span-12 grid">
+            <div v-if="form.tipo_doacao === 2" class="col-span-12 grid">
                 <h2 class="col-span-12 text-2xl text-green-900 dark:text-white mb-5">Acervo</h2>
 
                 <!-- Tabela de produtos -->

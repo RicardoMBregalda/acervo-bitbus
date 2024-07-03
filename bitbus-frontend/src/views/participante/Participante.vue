@@ -13,7 +13,6 @@ onMounted(async () => {
   try {
     const response = await axios.get('http://127.0.0.1:8000/api/participante');
     participantes.value = response.data.data;
-    console.log(response);
   } catch (error) {
     console.error('Error fetching data', error);
   }

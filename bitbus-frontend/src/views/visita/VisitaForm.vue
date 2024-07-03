@@ -104,7 +104,6 @@ const removerVisitante = (index) => {
 async function handleSubmit(data) {
     data.produtos = produtosLista.value;
     data.participantes = visitantesLista.value;
-    console.log("data", data)
     try {
         if (route.params.id) {
             const response = await axios.put(`http://127.0.0.1:8000/api/visita/${route.params.id}`, data);

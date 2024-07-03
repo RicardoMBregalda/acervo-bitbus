@@ -38,7 +38,7 @@ class DoacaoService {
 
     public function find(int $id): Doacao
     {
-        return Doacao::with(['produtos', 'participantes'])->findOrFail($id);
+        return Doacao::with(['produtos', 'participante'])->findOrFail($id);
     }
 
     public function update(int $id, DoacaoDTO $data): Doacao

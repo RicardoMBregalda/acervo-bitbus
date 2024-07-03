@@ -30,7 +30,6 @@ watch(form.value, (newValue) => {
 
 
 async function handleSubmit(data) {
-    console.log("data", data)
     try {
         if (route.params.id) {
             const response = await axios.put(`http://127.0.0.1:8000/api/participante/${route.params.id}`, data);

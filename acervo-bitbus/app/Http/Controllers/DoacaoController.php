@@ -20,7 +20,7 @@ class DoacaoController extends Controller
     {
         $search = $request->input('id');
 
-        $query = Doacao::query();
+        $query = Doacao::with(['participante', 'produtos']);
 
         if ($search) {
             $query->where('id', 'LIKE', "%{$search}%");

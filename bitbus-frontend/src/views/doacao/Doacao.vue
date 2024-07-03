@@ -92,13 +92,13 @@ const buscarDoacao = () => {
               Código
             </th>
             <th scope="col" class="px-6 py-3">
-              Descricao
+              Detalhes
             </th>
             <th scope="col" class="px-6 py-3">
-              Organizador
+              Tipo Doação
             </th>
             <th scope="col" class="px-6 py-3">
-              Cidade
+              Participante
             </th>
             <th scope="col" class="px-6 py-3" style="width:3%">
             </th>
@@ -107,20 +107,20 @@ const buscarDoacao = () => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(doacao) in doacoes" :key="doacao.id"
+          <tr v-for="doacao in doacoes" :key="doacao.id"
             class="bg-white border-b dark:bg-green-800 dark:border-green-500 hover:bg-green-50 dark:hover:bg-green-600">
 
             <td class="px-6 py-4 font-semibold text-green-900 dark:text-white">
               {{ doacao.id }}
             </td>
             <td class="px-6 py-4 font-semibold text-green-900 dark:text-white">
-              {{ doacao.descricao }}
+              {{ doacao.detalhes }}
             </td>
             <td class="px-6 py-4 font-semibold text-green-900 dark:text-white">
-              {{ doacao.organizador }}
+              {{ doacao.tipo_doacao == 1 ? 'Dinheiro' : 'Produto' }}
             </td>
             <td class="px-6 py-4 font-semibold text-green-900 dark:text-white">
-              {{ doacao.cidade }}
+              {{ doacao.participante.nome }}
             </td>
             <td class="px-6 py-4">
               <div class="flex items">
