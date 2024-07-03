@@ -99,6 +99,9 @@ const buscarProduto = () => {
               Descrição
             </th>
             <th scope="col" class="px-6 py-3">
+              Informações
+            </th>
+            <th scope="col" class="px-6 py-3">
               Tipo
             </th>
             <th scope="col" class="px-6 py-3">
@@ -124,6 +127,9 @@ const buscarProduto = () => {
             </td>
             <td class="px-6 py-4 font-semibold text-green-900 dark:text-white">
               {{ acervo.codigo }}
+            </td>
+            <td class="px-6 py-4 font-semibold text-green-900 dark:text-white">
+              {{ acervo.nome }}
             </td>
             <td class="px-6 py-4 font-semibold text-green-900 dark:text-white">
               {{ acervo.informacoes }}
