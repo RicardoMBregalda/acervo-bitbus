@@ -110,7 +110,7 @@ const adicionarParticipante = () => {
 
 const adicionarProduto = () => {
     if (
-        novoNomeProduto .value
+        novoNomeProduto.value
         && novoCodigo.value
         && novoAno.value
         && novoTipoProduto.value
@@ -156,7 +156,6 @@ const removerParticipante = (index) => {
 async function handleSubmit(data) {
     data.produtos = produtosLista.value;
     data.participante = participantesLista.value;
-    data.tipo_doacao = data.tipo_doacao === 'produto' ? TIPO_PRODUTO : TIPO_DINHEIRO;
     data.valor = data.valor ? data.valor : 0.0;
     try {
         if (route.params.id) {
@@ -256,7 +255,7 @@ async function handleSubmit(data) {
                     </div>
                     <div class="ml-5 col-span-2">
                         <button type="button" @click="adicionarParticipanteExistente"
-                            class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">
+                            class="mb-5 text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">
                             Adicionar
                         </button>
                     </div>
@@ -303,7 +302,7 @@ async function handleSubmit(data) {
                     </div>
                 </div>
             </div>
-            
+
             <div class="mb-5 col-span-12">
                 <select id="tipo_doacao" v-model="form.tipo_doacao"
                     class="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
@@ -313,7 +312,7 @@ async function handleSubmit(data) {
                 </select>
             </div>
 
-            <div v-if="form.tipo_doacao === 2" class="col-span-12 grid">
+            <div v-if="form.tipo_doacao == 2" class="col-span-12 grid">
                 <h2 class="col-span-12 text-2xl text-green-900 dark:text-white mb-5">Acervo</h2>
 
                 <!-- Tabela de produtos -->
@@ -478,7 +477,7 @@ async function handleSubmit(data) {
                 </div>
             </div>
 
-            <div v-else-if="form.tipo_doacao === 'dinheiro'" class="mb-5 col-span-12">
+            <div v-else-if="form.tipo_doacao == 1" class="mb-5 col-span-12">
                 <label for="valor" class="block mb-2 text-sm font-medium text-green-900 dark:text-white">Valor</label>
                 <input type="text" id="valor" v-model="form.valor"
                     class="shadow-sm bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"

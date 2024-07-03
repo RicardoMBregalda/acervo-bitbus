@@ -8,7 +8,7 @@ class DoacaoDTO extends BaseDTO
 {
     public readonly int $tipo_doacao;
     public readonly float $valor;
-    public readonly string $detalhes;
+    public readonly string|null $detalhes;
     public int $participante_id;
 
     public function __construct(array $data)
@@ -19,7 +19,7 @@ class DoacaoDTO extends BaseDTO
             }
         }
     }
-    
+
     public static function fromValidatedData(array $validatedData): self
     {
         return new self([
