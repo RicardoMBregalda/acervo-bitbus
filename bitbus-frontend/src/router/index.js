@@ -11,6 +11,7 @@ import Doacao from '../views/doacao/Doacao.vue';
 import DoacaoForm from '../views/doacao/DoacaoForm.vue';
 import Feedback from '../views/feedback/Feedback.vue';
 import FeedbackForm from '../views/feedback/FeedbackForm.vue';
+import Login from '../views/login/Login.vue';
 
 const routes = [
   {
@@ -108,6 +109,11 @@ const routes = [
     name:'FeedbackForm',
     component: FeedbackForm,
   },
+  {
+    path:'/login',
+    name:'Login',
+    component: Login,
+  }
 ];
 
 const router = createRouter({
@@ -115,13 +121,13 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   const token = localStorage.getItem('token');
-//   if (to.path !== '/login' && !token) {
-//     next('/login');
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+  if (to.name !== 'FeedbackForm' && to.path !== '/login' && !token) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router;
