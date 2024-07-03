@@ -85,7 +85,7 @@ const routes = [
   },
   {
     path:'/doacao/index',
-    name:'Doacao',
+    name:'Doacoes',
     component: Doacao,
   },
   {
