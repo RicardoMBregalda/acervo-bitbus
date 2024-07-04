@@ -13,7 +13,7 @@ class ProdutoDTO extends BaseDTO
     public readonly int $quantidade;
     public readonly string $dimensoes;
     public readonly string $informacoes;
-    public readonly string $link;
+    public readonly string|null $link;
     public readonly string $local_de_armazenamento;
 
 
