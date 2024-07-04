@@ -44,7 +44,7 @@ Route::put('doacao/{id}', [DoacaoController::class, 'update']);
 Route::delete('doacao/{id}', [DoacaoController::class, 'delete']);
 
 Route::post('feedback', [FeedbackController::class, 'store']);
-Route::get('feedback', [FeedbackController::class, '    ']);
+Route::get('feedback', [FeedbackController::class, 'index']);
 Route::get('feedback/{id}', [FeedbackController::class, 'show']);
 Route::put('feedback/{id}', [FeedbackController::class, 'update']);
 Route::delete('feedback/{id}', [FeedbackController::class, 'delete']);
