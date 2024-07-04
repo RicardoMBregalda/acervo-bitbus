@@ -1,4 +1,13 @@
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function logout() {
+  localStorage.removeItem('token');
+  router.push({ name: 'Login' });
+}
+</script>
 
 <template>
     <aside id="default-sidebar"
@@ -91,6 +100,19 @@
 
 
                         <span class="flex-1 ms-3 whitespace-nowrap">Feedback</span>
+                    </router-link>
+                </li>
+                <li @click="logout">
+                    <router-link to=""
+                        class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-800 group">
+                        <svg class="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-green-400 group-hover:text-white dark:group-hover:text-green-200"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-6.616l-2.88 2.592C8.537 20.461 7 19.776 7 18.477V17H5a2 2 0 0 1-2-2V6Zm4 2a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2H7Zm8 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2Zm-8 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Zm5 0a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2h-5Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
                     </router-link>
                 </li>
             </ul>
