@@ -193,7 +193,7 @@
       </h2>
 
       <h2 class="col-span-12 text-2xl text-green-900 dark:text-white my-5">
-        Doador/Participante
+        Doador
       </h2>
 
       <div
@@ -271,7 +271,7 @@
               class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 rounded-full peer dark:bg-green-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-green-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-green-600 peer-checked:bg-green-600"></div>
             <span
               class="ms-3 text-sm font-medium text-green-900 dark:text-green-300"
-              >Participante Existente?</span
+              >Doador Existente</span
             >
           </label>
         </div>
@@ -316,7 +316,7 @@
               id="novoNome"
               v-model="novoNome"
               class="shadow-sm bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
-              placeholder="Nome do Visitante" />
+              placeholder="Nome do Doador" />
           </div>
           <div class="mb-5 ml-5 col-span-1">
             <label
@@ -453,7 +453,7 @@
               class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 rounded-full peer dark:bg-green-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-green-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-green-600 peer-checked:bg-green-600"></div>
             <span
               class="ms-3 text-sm font-medium text-green-900 dark:text-green-300"
-              >Produto Existente?</span
+              >Produto Existente</span
             >
           </label>
         </div>
@@ -656,7 +656,7 @@
           id="detalhes"
           rows="4"
           class="block p-2.5 w-full text-sm text-green-900 bg-green-50 rounded-lg border border-green-300 focus:ring-green-500 focus:border-green-500 dark:bg-green-500 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-          placeholder="Descreva a visita...">
+          placeholder="Descreva a doação...">
         </textarea>
       </div>
 
